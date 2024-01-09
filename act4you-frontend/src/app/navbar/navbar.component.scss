@@ -26,6 +26,10 @@ $your-theme: mat.define-light-theme((
  padding: 0 16px;
 }
 
+.example-spacer {
+   flex: 1 1 auto;
+ } 
+
 .navbar a {
  color: mat.get-color-from-palette($primary, default-contrast);
  text-decoration: none;
