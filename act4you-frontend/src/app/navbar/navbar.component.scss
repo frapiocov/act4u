@@ -1,0 +1,37 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary: mat.define-palette(mat.$indigo-palette);
+$accent: mat.define-palette(mat.$yellow-palette);
+$warn:    mat.define-palette(mat.$red-palette);
+
+$your-theme: mat.define-light-theme((
+ color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+ ),
+));
+
+@include mat.all-component-themes($your-theme);
+
+// Styles for your navbar
+.navbar {
+ background-color: mat.get-color-from-palette($primary, 500);
+ height: 64px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 0 16px;
+}
+
+.navbar a {
+ color: mat.get-color-from-palette($primary, default-contrast);
+ text-decoration: none;
+ margin: 0 12px;
+}
+
+.navbar a:hover {
+ color: mat.get-color-from-palette($primary, lighter);
+}
