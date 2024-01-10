@@ -3,12 +3,10 @@
 
   <div class="collapse navbar-collapse">
     <div class="navbar-nav">
-      <a
-        class="nav-item nav-link"
-        *ngFor="let link of links"
-        [routerLink]="link.link"
-        >{{ link.title }}</a
-      >
+      <a class="nav-item nav-link" routerLink="/qna" *ngIf="userType=='user'">QnA</a>
+      <a class="nav-item nav-link" routerLink="/send-notification" *ngIf="userType=='admin'">Invia notifica</a>
+      <a class="nav-item nav-link" routerLink="/view-applications" *ngIf="userType=='admin'">Vedi candidature</a>
+      <a class="nav-item nav-link" routerLink="/create-announcement" *ngIf="userType=='admin'">Crea annuncio</a>
       <app-user-login></app-user-login>
     </div>
   </div>

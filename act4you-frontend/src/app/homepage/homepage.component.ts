@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AnnunciComponent } from '../annunci/annunci.component';
+import { AnnuncioComponent } from '../annuncio/annuncio.component';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [AnnunciComponent],
+  imports: [AnnuncioComponent],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })

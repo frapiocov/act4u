@@ -12,15 +12,9 @@ import { UserLoginComponent } from '../user-login/user-login.component';
 })
 export class NavbarComponent {
 
- isCollapsed = true;
+  //TODO valorizzare in base al tipo non loggato (undefined), user, admin
+  userType: string | undefined;
 
- links = [
-    { title: 'QnA (per utente)', link: '/qna' },
-    { title: 'Invia notifica(admin)', link: '/send-notification' },
-    { title: 'Vedi candidature(admin)', link: '/view-applications' },
-    { title: 'Crea annuncio(admin)', link: '/create-announcement' }
-  ];
-
- constructor() { }
+ constructor() {}
 
 }
