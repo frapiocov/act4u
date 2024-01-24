@@ -1,20 +1,21 @@
 import { CommonModule} from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { UserLoginComponent } from '../user-login/user-login.component';
+import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
   selector: 'app-navbar',
-  imports: [CommonModule, RouterModule, UserLoginComponent],
+  imports: [CommonModule, RouterLink, MatIconModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
 
   //TODO valorizzare in base al tipo non loggato (undefined), user, admin
-  userType: string | undefined;
+  userType: string | undefined = 'admin';
 
- constructor() {}
+  constructor() {}
+
 
 }
