@@ -1,2 +1,15 @@
-<app-navbar></app-navbar>
+<!-- <app-navbar></app-navbar> -->
+<div>
+    <a class="title" href="/">{{ title }}</a>
+  
+    <div class="toolbar-spacer"></div>
+  
+    <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+    <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+</div>
+  <div class="container">
+    <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+    <router-outlet *ngIf="!isIframe"></router-outlet>
+  </div>
+  
 <router-outlet></router-outlet>
