@@ -84,7 +84,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   };
 }
 @NgModule({
-  declarations: [AppComponent, HomepageComponent, ProfileComponent],
+  declarations: [],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
