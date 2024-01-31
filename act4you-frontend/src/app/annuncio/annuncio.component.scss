@@ -4,6 +4,7 @@
     border-radius: 20px;
     padding-left: 1rem;
     margin: 1rem;
+    padding-bottom: 1rem;
 }
 
 .card mat-card-content {
@@ -15,4 +16,13 @@
 .card mat-card-content button{
     align-self: flex-end;
     margin-right: 1rem;
+}
+
+.card button {
+    margin: 1rem;
+}
+
+.card mat-card-title{
+    font-size:x-large;
+    font-weight: 500;
 }

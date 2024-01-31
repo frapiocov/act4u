@@ -1,1 +1,41 @@
-<p>new-annuncio works!</p>
+<div class="root">
+  <div class="container">
+    <h1>Crea un nuovo annuncio</h1>
+    <p>
+      Aggiungi un nuovo annuncio alla piattaforma specificando le informazioni
+      nel form sottostante
+    </p>
+
+    <form class="form-container">
+
+      <mat-form-field class="form-field">
+        <mat-label>Titolo</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Tipologia</mat-label>
+        <mat-select class="form-select">
+          <mat-option class="form-option" value="Film">Film</mat-option>
+          <mat-option class="form-option" value="2">Serie TV</mat-option>
+          <mat-option class="form-option" value="3">Teatro</mat-option>
+          <mat-option class="form-option" valur="4">Spot Pubblicitari</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="form-field">
+        <mat-label>Descrizione</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+      
+      <mat-form-field class="form-field">
+        <mat-label>Contatto</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+    </form>
+
+    <button>Aggiungi</button>
+  </div>
+</div>
+

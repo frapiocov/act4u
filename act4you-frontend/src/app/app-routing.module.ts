@@ -9,7 +9,6 @@ import { CandidatureComponent } from './candidature/candidature.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { NewAnnuncioComponent } from './new-annuncio/new-annuncio.component';
 
-
 const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [MsalGuard],},
   { path: '', component: HomepageComponent },
