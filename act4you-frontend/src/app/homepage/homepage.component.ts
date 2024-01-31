@@ -1,7 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AnnuncioComponent } from '../annuncio/annuncio.component';
-import { AnnuncioService } from '../annuncio.service';
-import { Annuncio } from '../annuncio/annuncio';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { EventMessage, EventType, AuthenticationResult } from '@azure/msal-browser';
 import { filter } from 'rxjs/operators';
