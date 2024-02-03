@@ -3,11 +3,12 @@ import { AnnuncioComponent } from '../annuncio/annuncio.component';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { EventMessage, EventType, AuthenticationResult } from '@azure/msal-browser';
 import { filter } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [AnnuncioComponent],
+  imports: [AnnuncioComponent, CommonModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
