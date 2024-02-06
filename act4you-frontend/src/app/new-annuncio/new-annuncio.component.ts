@@ -8,6 +8,7 @@ import { Annuncio } from '../annuncio/annuncio.model';
 import { AnnuncioComponent } from '../annuncio/annuncio.component';
 import * as uuid from 'uuid';
 import { NgFor, NgIf } from '@angular/common';
+import { Resource } from '@azure/cosmos';
 
 @Component({
   selector: 'app-new-annuncio',
@@ -18,7 +19,7 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class NewAnnuncioComponent implements OnInit {
   newAnn: Annuncio; // l'annuncio da aggiungere
-  annunci: Annuncio[] = [];
+  annunci: any[] = [];
 
   // form controls
   annForm = new FormGroup({

@@ -13,58 +13,73 @@ export class AnnuncioService {
   container: Container;
   client: CosmosClient;
   annunci: Items;
-  partitionKey = "annuncidb"
+  partitionKey = {kind:'Hash', paths:['/annuncidb']};
+  option = {
+    endpoint: env.endpoint,
+    key: env.key,
+    userAgentSuffix:'Act4You'
+  };
+
 
   constructor(private http: HttpClient) {
     this.initializeDB();
   }
 
-  async initializeDB() {
-    this.client = new CosmosClient({endpoint: env.endpoint, key: env.key}) 
+  initializeDB() {
+    this.client = new CosmosClient(this.option);
+
     this.annunci = this.client.database(env.databaseName).container(env.collectionName).items;
     this.database = this.client.database(env.databaseName);
     this.container = this.client.database(env.databaseName).container(env.collectionName);
   }
 
   async getAnnunci() {
+    var listAnnunci: any = [];
     const iterator = this.database.containers.readAll();
-    var response = await iterator.fetchAll();
-    console.log(response.resources);
-    return response.resources;
+    var {resources: results } = await iterator.fetchAll();
+    for (var queryResult of results) {
+      let resultString = JSON.stringify(queryResult)
+      console.log(resultString);
+      listAnnunci.push(resultString);
+    }
+    return listAnnunci;
   }
 
   async getAnnuncioById(id: string) {
     // ricerca un annuncio dato un id
-    var response = await this.container.item(id, this.partitionKey).read()
+    var response = await this.container.item(id).read()
     return response.resource
   }
 
   //rimuove un annuncio
   async deleteAnnuncio(ann: Annuncio) {
-    const item = this.container.item(ann.id, this.partitionKey);
-    await item.delete(); 
+    const item = this.container.item(ann.id);
+    await item.delete();
   }
 
- // inserimento annuncio
+  // inserimento annuncio
   async addAnnuncio(ann: Annuncio) {
-   var response = await this.container.items.upsert(ann); 
+    await this.container.items.upsert(ann);
     console.log("item added");
   }
 
   async updateAnnuncio(ann: Annuncio) {
     // update info annuncio
-    const item = this.container.item(ann.id, this.partitionKey);
-    await item.replace(ann);
-    
+    const item = await this.container.item(ann.id).replace(ann);
     console.log("item updated");
   }
 
   async findWithQuery(query: string) {
+    var listAnnunci: any = [];
     if (this.container) {
       throw new Error('Collection is not initialized.')
     }
-    var response = await this.annunci.query(query).fetchAll();
-    return response.resources;
+    var {resources: results} = await this.annunci.query(query).fetchAll();
+    for (var queryResult of results) {
+      let resultString = JSON.stringify(queryResult)
+      listAnnunci.push(resultString);
+    }
+    return listAnnunci;
   }
 
 }

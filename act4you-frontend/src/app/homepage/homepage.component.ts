@@ -19,7 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class HomepageComponent implements OnInit {
 
   loginDisplay = false;
-  annunci: Annuncio[] = [];
+  annunci: any[] = [];
 
   constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService, private annService: AnnuncioService) { }
 
@@ -34,11 +34,11 @@ export class HomepageComponent implements OnInit {
         this.setLoginDisplay();
       });
     this.setLoginDisplay();
-    this.getAnnunci();
+    /* this.getAnnunci(); */
   }
 
   async getAnnunci() {
-    this.annunci = await this.annService.getAnnunci();
+    /* this.annunci = await this.annService.getAnnunci(); */
   }
 
   setLoginDisplay() {
