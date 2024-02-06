@@ -1,12 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -33,6 +31,7 @@ import {
   MsalModule,
   MsalInterceptor,
 } from '@azure/msal-angular';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -94,6 +93,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatListModule,
     HttpClientModule,
     MsalModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
@@ -116,6 +116,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalService,
     MsalGuard,
     MsalBroadcastService,
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent, MsalRedirectComponent],
 })

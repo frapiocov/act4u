@@ -6,36 +6,48 @@
       nel form sottostante
     </p>
 
-    <form class="form-container">
+    <form class="form-container" [formGroup]="annForm" (ngSubmit)="save()">
 
       <mat-form-field class="form-field">
-        <mat-label>Titolo</mat-label>
-        <input matInput />
+        <mat-label for="title">Titolo</mat-label>
+        <input matInput id="title" type="text" formControlName="title" />
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label>Agenzia di Casting</mat-label>
+        <input id="agency" type="text" formControlName="agency" matInput />
       </mat-form-field>
 
       <mat-form-field class="form-field">
         <mat-label>Tipologia</mat-label>
-        <mat-select class="form-select">
+        <mat-select id="agency" formControlName="agency" class="form-select">
           <mat-option class="form-option" value="Film">Film</mat-option>
-          <mat-option class="form-option" value="2">Serie TV</mat-option>
-          <mat-option class="form-option" value="3">Teatro</mat-option>
-          <mat-option class="form-option" valur="4">Spot Pubblicitari</mat-option>
+          <mat-option class="form-option" value="Serie TV">Serie TV</mat-option>
+          <mat-option class="form-option" value="Teatro">Teatro</mat-option>
+          <mat-option class="form-option" valur="Spot">Spot Pubblicitari</mat-option>
         </mat-select>
       </mat-form-field>
       
       <mat-form-field class="form-field">
         <mat-label>Descrizione</mat-label>
-        <textarea matInput></textarea>
+        <textarea id="desc" type="text" formControlName="desc" matInput>
+        </textarea>
       </mat-form-field>
       
       <mat-form-field class="form-field">
         <mat-label>Contatto</mat-label>
-        <input matInput />
+        <input matInput id="contact" formControlName="contact"/>
       </mat-form-field>
 
+      <button type="submit" [disabled]="!annForm.valid">Crea Annuncio</button>
     </form>
+  </div>
 
-    <button>Aggiungi</button>
+  <div class="container">
+  <h1>Annunci pubblicati</h1>
+  <li *ngFor="let ann of annunci">
+    <app-annuncio [ann]="ann"></app-annuncio> 
+ </li>
   </div>
 </div>
 

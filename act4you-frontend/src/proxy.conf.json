@@ -1,0 +1,7 @@
+{
+    "/*": {
+        "target": "https://act4youcdb.documents.azure.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

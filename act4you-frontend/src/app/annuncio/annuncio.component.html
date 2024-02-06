@@ -1,16 +1,15 @@
 <mat-card class="card">
   <mat-card-header>
-    <mat-card-title>Titolo annuncio</mat-card-title>
-    <mat-card-subtitle>Agency</mat-card-subtitle>
+    <mat-card-title>{{ann.title}}</mat-card-title>
+    <mat-card-subtitle>{{ann.agency}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <p>
-      Descrizione annuncio, nel mezzo del cammin
-      di nostra vita mi ritrovai nella selva oscura
+      {{ann.desc}}
     </p>
-    <p>tipo annuncio /
-    data pubblicazione /
-    contatti</p>
+    <p>{{ann.type}} /
+    {{ann.data}} /
+    {{ann.contact}}</p>
   </mat-card-content>
   <mat-card-footer>
     <button>Candidati!</button>

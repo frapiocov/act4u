@@ -1,14 +1,32 @@
 <div id="root">
-    <div *ngIf="!loginDisplay">
-           <p>Please sign-in to see your profile information.</p>
-    </div>
-    
-    <div *ngIf="loginDisplay">
-        <p>Login successful!</p>
-        <p>Request your profile information by clicking Profile above.</p>
-    </div>
-    <app-annuncio></app-annuncio>
-    <app-annuncio></app-annuncio>
-    <app-annuncio></app-annuncio>
-</div>
+  <div *ngIf="!loginDisplay">
+    <h2>
+      Effettua il Login o Iscriviti con il tuo account Microsoft per iniziare a
+      candidarti!
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Accedi"
+        fontIcon="account_circle"
+        color="primary"
+      ></mat-icon>
+    </h2>
+  </div>
 
+  <div *ngIf="loginDisplay">
+    <p>
+        Login Eseguito corretamente! Controlla la tua sezione profilo
+        <mat-icon
+        aria-hidden="false"
+        aria-label="Accedi"
+        fontIcon="thumb_up_alt"
+        color="primary"
+      ></mat-icon>
+    </p>
+  </div>
+
+  <div class="list-container">
+    <li *ngFor="let ann of annunci">
+      <app-annuncio [ann]="ann"></app-annuncio>
+    </li>
+  </div>
+</div>

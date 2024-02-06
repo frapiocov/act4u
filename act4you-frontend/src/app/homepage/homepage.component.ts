@@ -4,19 +4,24 @@ import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { EventMessage, EventType, AuthenticationResult } from '@azure/msal-browser';
 import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
+import { AnnuncioService } from '../services/azure-cosmosdb.service';
+import { Annuncio } from '../annuncio/annuncio.model';
+import { NgFor, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [AnnuncioComponent, CommonModule],
+  imports: [AnnuncioComponent, MatIconModule, NgFor, NgIf, CommonModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent implements OnInit {
 
   loginDisplay = false;
+  annunci: Annuncio[] = [];
 
-  constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
+  constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService, private annService: AnnuncioService) { }
 
   ngOnInit(): void {
     this.msalBroadcastService.msalSubject$
@@ -28,57 +33,16 @@ export class HomepageComponent implements OnInit {
         this.authService.instance.setActiveAccount(payload.account);
         this.setLoginDisplay();
       });
-      this.setLoginDisplay();
+    this.setLoginDisplay();
+    this.getAnnunci();
+  }
+
+  async getAnnunci() {
+    this.annunci = await this.annService.getAnnunci();
   }
 
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
   }
 
-  /* addingAnnuncio = false;
-  annunci: any = [];
-  selectedAnnuncio: Annuncio;
-  constructor(private annuncioService: AnnuncioService) {}
-
-  ngOnInit(): void {
-      this.getAnnunci();
-      this.selectedAnnuncio = new Annuncio();
-  }
-
-  cancel() {
-    this.addingAnnuncio = false;
-  }
-
-  // elimina un annuncio dalla lista
-  deleteAnnuncio(annuncio: Annuncio) {
-    this.annuncioService.deleteAnnuncio(annuncio).subscribe(res => {
-      this.annunci = this.annunci.filter((h: Annuncio) => h !== annuncio);
-    });
-  }
-
-  // carica gli annunci dal db
-  getAnnunci() {
-    return this.annuncioService.getAnnunci().subscribe(annunci => {
-      this.annunci = annunci;
-    });
-  }
-
-  // mostra il form per l'aggiunta di un nuovo annuncio
-  enableAddMode() {
-    this.addingAnnuncio = true;
-  }
-
-  // salva un nuovo annuncio nel db o ne aggiorna le informazioni
-  save(annuncio: Annuncio) {
-    if (this.addingAnnuncio) {
-      this.annuncioService.addAnnuncio(this.selectedAnnuncio).subscribe(annuncio => {
-        this.addingAnnuncio = false;
-        this.annunci.push(annuncio);
-      });
-    } else {
-      this.annuncioService.updateAnnuncio(this.selectedAnnuncio).subscribe(annuncio => {
-        this.addingAnnuncio = false;
-      });
-    }
-  } */
 }
