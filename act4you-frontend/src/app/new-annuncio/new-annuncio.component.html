@@ -20,8 +20,8 @@
 
       <mat-form-field class="form-field">
         <mat-label>Tipologia</mat-label>
-        <mat-select id="agency" formControlName="agency" class="form-select">
-          <mat-option class="form-option" value="Film">Film</mat-option>
+        <mat-select [(ngModel)]="selectedTeam" id="type" formControlName="type" class="form-select">
+          <mat-option default class="form-option" value="Film">Film</mat-option>
           <mat-option class="form-option" value="Serie TV">Serie TV</mat-option>
           <mat-option class="form-option" value="Teatro">Teatro</mat-option>
           <mat-option class="form-option" valur="Spot">Spot Pubblicitari</mat-option>
@@ -47,7 +47,7 @@
   <h1>Annunci pubblicati</h1>
   <li *ngFor="let ann of annunci">
     <app-annuncio [ann]="ann"></app-annuncio> 
- </li>
+  </li>
   </div>
 </div>
 

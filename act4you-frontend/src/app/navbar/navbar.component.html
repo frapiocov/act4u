@@ -6,8 +6,8 @@
       <a class="nav-item nav-link" [routerLink]="['/profile']" *ngIf="userType=='admin'||userType=='user'">Profilo</a>
       <a class="nav-item nav-link" [routerLink]="['/qna']" *ngIf="userType=='user'">QnA</a>
       <a class="nav-item nav-link" [routerLink]="['/send-notification']" *ngIf="userType=='admin'">Invia notifica</a>
-      <a class="nav-item nav-link" [routerLink]="['/view-applications']" *ngIf="userType=='admin'">Vedi candidature</a>
-      <a class="nav-item nav-link" [routerLink]="['/create-announcement']" *ngIf="userType=='admin'">Crea annuncio</a>
+      <a class="nav-item nav-link" [routerLink]="['/view-applications']" *ngIf="userType=='admin'">Candidature</a>
+      <a class="nav-item nav-link" [routerLink]="['/create-announcement']" *ngIf="userType=='admin'">Gestione Annunci</a>
       <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
       <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
     </div>

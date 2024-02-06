@@ -23,8 +23,9 @@
       ></mat-icon>
     </p>
   </div>
-
+  <h1 class="title">Tutti gli annunci</h1>
   <div class="list-container">
+    
     <li *ngFor="let ann of annunci">
       <app-annuncio [ann]="ann"></app-annuncio>
     </li>

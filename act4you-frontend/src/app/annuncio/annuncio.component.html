@@ -7,11 +7,12 @@
     <p>
       {{ann.desc}}
     </p>
-    <p>{{ann.type}} /
-    {{ann.data}} /
+    <p>{{ann.type}} --
+    {{ann.data}} --
     {{ann.contact}}</p>
   </mat-card-content>
   <mat-card-footer>
     <button>Candidati!</button>
+    <button *ngIf="userType=='admin'" class="remove-btn">Elimina</button>
   </mat-card-footer>
 </mat-card>

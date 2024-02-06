@@ -39,7 +39,6 @@ export class HomepageComponent implements OnInit {
 
   async getAnnunci() {
     this.annunci = await this.annService.getAnnunci();
-    console.log(this.annunci[0]);
   }
 
   setLoginDisplay() {

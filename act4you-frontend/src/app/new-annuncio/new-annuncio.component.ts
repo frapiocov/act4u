@@ -17,7 +17,7 @@ import { NgFor, NgIf } from '@angular/common';
   styleUrl: './new-annuncio.component.scss'
 })
 export class NewAnnuncioComponent implements OnInit {
-  newAnn: Annuncio; // l'annuncio da aggiungere
+  newAnn = new Annuncio(); // l'annuncio da aggiungere
   annunci: any[] = [];
 
   // form controls
@@ -28,6 +28,8 @@ export class NewAnnuncioComponent implements OnInit {
     type: new FormControl(""),
     contact: new FormControl("")
   });
+
+  selectedTeam = '';
 
   constructor(private annService: AnnuncioService) { }
 
@@ -46,8 +48,7 @@ export class NewAnnuncioComponent implements OnInit {
 
   save() {
     // aggiunge la data odierna
-    const currentDateAndTime = new Date();
-    this.newAnn.data = currentDateAndTime.toLocaleString();
+    this.newAnn.data = new Date().toLocaleString();
     // crea un id univoco prima di salvare il dato 
     this.newAnn.id = uuid.v4();
 
@@ -56,13 +57,13 @@ export class NewAnnuncioComponent implements OnInit {
     this.newAnn.desc = this.annForm.value.desc!;
     this.newAnn.agency = this.annForm.value.agency!;
     this.newAnn.contact = this.annForm.value.contact!;
-    this.newAnn.type = this.annForm.value.type!;
+    this.newAnn.type = this.selectedTeam;
 
-    console.warn(this.newAnn);
-    if (this.newAnn) {
+    console.log(this.newAnn);
+    
       this.annService.addAnnuncio(this.newAnn);
       this.annunci.push(this.newAnn);
-    }
+    
   }
 
 }

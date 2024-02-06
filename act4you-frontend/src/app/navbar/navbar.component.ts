@@ -73,8 +73,8 @@ export class NavbarComponent {
   logout() {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
       this.authService.logoutPopup({
-        postLogoutRedirectUri: "/",
-        mainWindowRedirectUri: "/"
+        postLogoutRedirectUri: "http://localhost:4200/",
+        mainWindowRedirectUri: "http://localhost:4200/"
       });
     } else {
       this.authService.logoutRedirect({
