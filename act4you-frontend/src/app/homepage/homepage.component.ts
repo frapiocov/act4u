@@ -34,11 +34,12 @@ export class HomepageComponent implements OnInit {
         this.setLoginDisplay();
       });
     this.setLoginDisplay();
-    /* this.getAnnunci(); */
+    this.getAnnunci();
   }
 
   async getAnnunci() {
-    /* this.annunci = await this.annService.getAnnunci(); */
+    this.annunci = await this.annService.getAnnunci();
+    console.log(this.annunci[0]);
   }
 
   setLoginDisplay() {

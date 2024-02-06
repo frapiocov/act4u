@@ -34,13 +34,14 @@ export class AnnuncioService {
   }
 
   async getAnnunci() {
+    const querySpec = { query: "SELECT * FROM Annunci" };
+
     var listAnnunci: any = [];
-    const iterator = this.database.containers.readAll();
-    var {resources: results } = await iterator.fetchAll();
-    for (var queryResult of results) {
+    var {resources: results} = await this.annunci.query(querySpec).fetchAll();
+     for (var queryResult of results) {
       let resultString = JSON.stringify(queryResult)
-      console.log(resultString);
-      listAnnunci.push(resultString);
+      let resultObj = JSON.parse(resultString);
+      listAnnunci.push(resultObj);
     }
     return listAnnunci;
   }

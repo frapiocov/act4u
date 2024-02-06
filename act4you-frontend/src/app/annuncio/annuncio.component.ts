@@ -12,6 +12,6 @@ import { Annuncio } from './annuncio.model';
 })
 export class AnnuncioComponent {
   
-  @Input() ann: Annuncio;
+  @Input() ann: any;
 
 }
