@@ -46,7 +46,8 @@
   <div class="container">
   <h1>Annunci pubblicati</h1>
   <li *ngFor="let ann of annunci">
-    <app-annuncio [ann]="ann"></app-annuncio> 
+    <app-annuncio [ann]="ann"></app-annuncio>
+    <button class="remove-btn" (click)="deleteAnnuncio(ann)">Elimina</button>
   </li>
   </div>
 </div>

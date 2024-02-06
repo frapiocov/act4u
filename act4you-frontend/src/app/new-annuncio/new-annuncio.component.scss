@@ -5,7 +5,7 @@
   margin: 2em;
   padding: 1em;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;  
+  border-radius: 10px;  
   background: whitesmoke;
 }
 
@@ -28,4 +28,8 @@
 
 ul, li {
   list-style-type: none;
+}
+
+.remove-btn {
+  background: rgb(150, 45, 45);
 }

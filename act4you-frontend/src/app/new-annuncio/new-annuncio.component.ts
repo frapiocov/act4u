@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +19,7 @@ import { NgFor, NgIf } from '@angular/common';
 export class NewAnnuncioComponent implements OnInit {
   newAnn = new Annuncio(); // l'annuncio da aggiungere
   annunci: any[] = [];
+  loginUser: boolean;
 
   // form controls
   annForm = new FormGroup({
@@ -58,12 +59,9 @@ export class NewAnnuncioComponent implements OnInit {
     this.newAnn.agency = this.annForm.value.agency!;
     this.newAnn.contact = this.annForm.value.contact!;
     this.newAnn.type = this.selectedTeam;
-
-    console.log(this.newAnn);
     
-      this.annService.addAnnuncio(this.newAnn);
-      this.annunci.push(this.newAnn);
-    
+    this.annService.addAnnuncio(this.newAnn);
+    this.annunci.push(this.newAnn);
   }
 
 }
