@@ -1,1 +1,9 @@
-<p>qn-a works!</p>
+<div class="container">
+    <h2>Interagisci con il nostro Chatbot, chiedi tutto ciò di cui hai bisogno</h2>
+    <kendo-chat
+    [user]="user"
+    [messages]="messages"
+    (sendMessage)="sendMessage($event)"
+>
+</kendo-chat>
+</div>

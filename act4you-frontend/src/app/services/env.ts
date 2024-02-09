@@ -16,5 +16,6 @@ export const env = {
         data:"06/02/2022",
         contact:"fintagency@libero.it",
       }
-    }
+    },
+    qnaEndpoint: "https://qna-act4u.cognitiveservices.azure.com/language/:query-knowledgebases?projectName=Act4YouQnA&api-version=2021-10-01&deploymentName=production",
   };

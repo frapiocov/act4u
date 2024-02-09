@@ -20,6 +20,8 @@ export class NewAnnuncioComponent implements OnInit {
   newAnn = new Annuncio(); // l'annuncio da aggiungere
   annunci: any[] = [];
   loginUser: boolean;
+  token = "";
+  name = "";
 
   // form controls
   annForm = new FormGroup({
@@ -35,6 +37,8 @@ export class NewAnnuncioComponent implements OnInit {
   constructor(private annService: AnnuncioService) { }
 
   ngOnInit() {
+    this.token = sessionStorage.getItem('accToken')!;
+    this.name = sessionStorage.getItem('accName')!;
     this.getAnnunci();
   }
 
@@ -44,7 +48,7 @@ export class NewAnnuncioComponent implements OnInit {
   }
 
   deleteAnnuncio(ann: Annuncio) {
-    this.annService.deleteAnnuncio(ann);
+    this.annService.deleteAnnuncio(ann);  
   }
 
   save() {
@@ -59,7 +63,7 @@ export class NewAnnuncioComponent implements OnInit {
     this.newAnn.agency = this.annForm.value.agency!;
     this.newAnn.contact = this.annForm.value.contact!;
     this.newAnn.type = this.selectedTeam;
-    
+
     this.annService.addAnnuncio(this.newAnn);
     this.annunci.push(this.newAnn);
   }

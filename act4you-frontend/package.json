@@ -25,6 +25,7 @@
     "@azure/msal-angular": "^3.0.11",
     "@azure/msal-browser": "^3.7.1",
     "@azure/storage-blob": "^12.17.0",
+    "@progress/kendo-angular-conversational-ui": "^15.0.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.2",
@@ -34,7 +35,19 @@
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uuidv4": "^6.2.13",
-    "zone.js": "~0.14.2"
+    "zone.js": "~0.14.2",
+    "@progress/kendo-licensing": "^1.0.2",
+    "@progress/kendo-angular-buttons": "15.0.1",
+    "@progress/kendo-angular-inputs": "15.0.1",
+    "@progress/kendo-angular-layout": "15.0.1",
+    "@progress/kendo-angular-icons": "15.0.1",
+    "@progress/kendo-angular-common": "15.0.1",
+    "@progress/kendo-angular-intl": "15.0.1",
+    "@progress/kendo-angular-l10n": "15.0.1",
+    "@progress/kendo-angular-popup": "15.0.1",
+    "@progress/kendo-svg-icons": "^2.0.0",
+    "@angular/localize": "^17.0.0",
+    "@progress/kendo-theme-default": "^7.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.9",
