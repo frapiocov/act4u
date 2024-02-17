@@ -1,17 +1,15 @@
 import { Injectable } from "@angular/core"
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 
-
-
 @Injectable({
     providedIn: 'root'
 })
 export class AzureBlobStorageService{
 
     accountName = "act4ublob";
-    imageSasToken = "sp=racwdl&st=2024-02-05T11:06:14Z&se=2025-02-05T19:06:14Z&sv=2022-11-02&sr=c&sig=c%2FeP%2BayniymuxegEtq0b3gYWhe8C8KfVdtyeezLey48%3D";
+    imageSasToken = "sp=racwdl&st=2024-02-09T16:10:27Z&se=2025-02-10T00:10:27Z&spr=https&sv=2022-11-02&sr=c&sig=cKdvWUUsUlTblCRZsrKsn1j0CrGVFHPVnIm%2BNBfDcbs%3D";
     videoSasToken = "sp=racwdl&st=2024-02-05T11:02:34Z&se=2025-02-05T19:02:34Z&sv=2022-11-02&sr=c&sig=CDyByVL2eXkYdWOxCfcu0GMdFcaawbSZLrCjOnkdtho%3D";
-    fileSasToken = "sp=racwdl&st=2024-02-05T11:06:50Z&se=2025-02-05T19:06:50Z&sv=2022-11-02&sr=c&sig=Z5myRiX%2FEKI%2B1e1jwqKTustCiItUqDgQKHv%2BM2b00uM%3D";
+    fileSasToken = "sp=racwdl&st=2024-02-09T16:08:14Z&se=2025-01-10T00:08:14Z&spr=https&sv=2022-11-02&sr=c&sig=TzNnNAbzNWEOXqacCtB3nTlWH6n46oFpEl9%2FJeqBQ3w%3D";
 
     constructor() {}
 
@@ -26,17 +24,17 @@ export class AzureBlobStorageService{
     }
 
     public deleteImage( name: string, handler: () =>void){
-        this.containerClient(this.imageSasToken).deleteBlob(name).then(() =>{
+        this.containerClient('pictures', this.imageSasToken).deleteBlob(name).then(() =>{
             handler();
         })
     }
 
-    public  uploadImage( content: Blob, name: string, handler: () =>void){
-        const blockBlobClient = this.containerClient(this.imageSasToken).getBlockBlobClient(name);
+    public uploadImage( content: Blob, name: string, handler: () =>void){
+        const blockBlobClient = this.containerClient('pictures', this.imageSasToken).getBlockBlobClient(name);
         blockBlobClient.uploadData(content, { blobHTTPHeaders: { blobContentType: content.type}})
         .then(() => handler());
     }
-
+      
     public downloadFile(name: string, handler: (blob:Blob) => void){
         const blobClient = this.containerClient('files').getBlobClient(name);
         blobClient.download().then(resp => {
@@ -47,14 +45,15 @@ export class AzureBlobStorageService{
     }
 
     public deleteFile( name: string, handler: () =>void){
-        this.containerClient(this.fileSasToken).deleteBlob(name).then(() =>{
+        this.containerClient('files', this.fileSasToken).deleteBlob(name).then(() =>{
             handler();
         })
     }
 
-    public  uploadFile( content: Blob, name: string, handler: () =>void){
-        const blockBlobClient = this.containerClient(this.fileSasToken).getBlockBlobClient(name);
-        blockBlobClient.uploadData(content, { blobHTTPHeaders: { blobContentType: content.type}})
+
+    uploadFile(file: Blob, fileName: string, handler: () => void) {
+        const blockBlobClient = this.containerClient('files', this.fileSasToken).getBlockBlobClient(fileName);
+        blockBlobClient.uploadData(file, { blobHTTPHeaders: { blobContentType: file.type}})
         .then(() => handler());
     }
 
@@ -68,13 +67,13 @@ export class AzureBlobStorageService{
     }
     
     public deleteVideo( name: string, handler: () =>void){
-        this.containerClient(this.videoSasToken).deleteBlob(name).then(() =>{
+        this.containerClient('videos', this.videoSasToken).deleteBlob(name).then(() =>{
             handler();
         })
     }
 
     public  uploadVideo( content: Blob, name: string, handler: () =>void){
-        const blockBlobClient = this.containerClient(this.videoSasToken).getBlockBlobClient(name);
+        const blockBlobClient = this.containerClient('videos', this.videoSasToken).getBlockBlobClient(name);
         blockBlobClient.uploadData(content, { blobHTTPHeaders: { blobContentType: content.type}})
         .then(() => handler());
     }

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AzureBlobStorageService } from '../services/azure-blob-storage.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-candidature',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './candidature.component.html',
   styleUrl: './candidature.component.scss'
 })
@@ -24,6 +25,7 @@ export class CandidatureComponent {
   public imageSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input && input.files) {
+      console.log(input.files[0]);
       const file = input.files[0];
       this.blobService.uploadImage(file, 'prova', () => { //il nome verrà preso dal db, creato con metodo da definire
         this.reloadImagesList();
@@ -31,18 +33,22 @@ export class CandidatureComponent {
     }
   }
 
-  public fileSelected(input: HTMLInputElement | null) {
+  public fileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
     if (input && input.files) {
+      console.log(input.files[0]);
       const file = input.files[0];
       this.blobService.uploadFile(file, 'prova', () => { //il nome verrà preso dal db, creato con metodo da definire
         this.reloadFilesList();
-      })
+      });
     }
   }
 
   
-  public videoSelected(input: HTMLInputElement | null) {
+  public videoSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
     if (input && input.files) {
+      console.log(input.files[0]);
       const file = input.files[0];
       this.blobService.uploadVideo(file, 'prova', () => { //il nome verrà preso dal db, creato con metodo da definire
         this.reloadVideoList();
@@ -94,18 +100,21 @@ export class CandidatureComponent {
   public reloadImagesList() {
     this.blobService.listElement('pictures').then(list => {
       this.imagesList = list;
+      console.log('Images', this.imagesList);
     })
   }
 
   public reloadVideoList() {
     this.blobService.listElement('videos').then(list => {
       this.videoList = list;
+      console.log('Video', this.videoList);
     })
   }
 
   public reloadFilesList() {
     this.blobService.listElement('files').then(list => {
       this.filesList = list;
+      console.log('Files', this.filesList);
     })
   }
 }
