@@ -1,9 +1,6 @@
-<div class="container">
-    <h2>Interagisci con il nostro Chatbot, chiedi tutto ciò di cui hai bisogno</h2>
-    <kendo-chat
-    [user]="user"
-    [messages]="messages"
-    (sendMessage)="sendMessage($event)"
->
-</kendo-chat>
-</div>
+<div class="flex">
+    <div class="main-container">
+        <h1>Sezione Question & Answer: poni al noatro bot tutte le tue perplessità!</h1>
+        <div class="webchat-container" #botWindow></div>
+    </div>
+  </div>

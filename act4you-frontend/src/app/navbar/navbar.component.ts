@@ -50,8 +50,11 @@ export class NavbarComponent {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
 
     this.profile = this.authService.instance.getAllAccounts()[0];
-    sessionStorage.setItem('accName', this.profile.name!);
+    if(this.profile!=null){
+      sessionStorage.setItem('accName', this.profile.name!);
     sessionStorage.setItem('accToken', this.profile.tenantId!);
+    }
+    
   }
 
   login() {

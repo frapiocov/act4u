@@ -48,7 +48,8 @@ export class NewAnnuncioComponent implements OnInit {
   }
 
   deleteAnnuncio(ann: Annuncio) {
-    this.annService.deleteAnnuncio(ann);  
+    this.annService.deleteAnnuncio(ann);
+    window.location.reload();  
   }
 
   save() {

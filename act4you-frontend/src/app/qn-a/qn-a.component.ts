@@ -1,22 +1,89 @@
-import { Component } from '@angular/core';
-import { ChatModule, Message, SendMessageEvent, User } from '@progress/kendo-angular-conversational-ui';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { QnaService } from '../services/azure-qna.service';
+import { env } from '../services/env';
+import { NgxMicrosoftBotFrameworkModule } from '@solutionspme/ngx-microsoft-bot-framework';
+import { BotDirective, BotHelperDirective, StyleSetDirective, BotService, ComService, IPayload, DEFAULT_OPTIONS } from '@solutionspme/ngx-microsoft-bot-framework';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-qn-a',
   standalone: true,
-  imports: [ChatModule],
+  imports: [NgxMicrosoftBotFrameworkModule, CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule],
   templateUrl: './qn-a.component.html',
   styleUrl: './qn-a.component.scss'
 })
 
-export class QnAComponent {
-  posts: Object;
+export class QnAComponent implements OnInit {
 
-  constructor(private qnaService: QnaService){}
-  
-  public bot: User = { id: 0 };
+  @ViewChild("botWindow", { static: false }) botWindowElement: ElementRef;
+  passViewChild: ViewChild;
+
+  payload: IPayload = {
+    secret: env.qnaBotKey,
+    url: 'https://webchat.botframework.com/api/tokens',
+    secretSetting: false
+  };
+
+  stylesetPayload: DEFAULT_OPTIONS = {
+    rootHeight: '100%',
+    botAvatarInitials: 'BF',
+    userAvatarInitials: 'CH',
+    backgroundColor: '#131313',
+    root: {
+      /* width */
+      ' ::-webkit-scrollbar': {
+        width: '3px'
+      },
+    },
+    textContent: {
+      fontFamily: '\'Comic Sans MS\', \'Arial\', sans-serif',
+      fontWeight: 'bold',
+    }
+  };
+
+  styleOptionsPayload: DEFAULT_OPTIONS = {
+    rootHeight: '100%',
+    botAvatarInitials: 'AC',
+    userAvatarInitials: 'US',
+    backgroundColor: 'red',
+  };
+
+  constructor(private qnaService: QnaService, private comService: ComService,
+    private botDirective: BotDirective) { }
+
+
+  ngOnInit(): void {
+    this.obtainStylePayload();
+    this.obtainLocalToken();
+  }
+
+  public ngAfterViewInit(): void {
+    this.setBotDirective();
+  }
+
+  setBotDirective(): void {
+    this.passViewChild = this.botWindowElement.nativeElement;
+    this.botDirective.botDirective(this.passViewChild);
+  }
+
+  obtainLocalToken() {
+    this.comService.obtainToken(this.payload);
+  }
+
+  obtainStylePayload() {
+    this.comService.obtainStylePayload(this.stylesetPayload, this.styleOptionsPayload)
+  }
+
+  /* public bot: User = { id: 0 };
   public user: User = { id: 1 };
+  public answer: Message;
+  ans = {
+    author: this.bot,
+    text: ""
+  };
 
   public messages: Message[] = [
     {
@@ -30,30 +97,9 @@ export class QnAComponent {
   ];
 
   public sendMessage(e: SendMessageEvent): void {
-
-    this.qnaService.sendQuestion(e.message.text!).subscribe(
-      (response) => { this.posts = response; },
-      (error) => { console.log(error); });
-    
+    // invia il messaggio utente al bot e lo aggiunge alla ui
+    this.qnaService.sendQuestion(e.message.text!);
     this.messages = [...this.messages, e.message];
-  }
-
-
+    // risposta del bot
+  } */
 }
-
-/**
- * curl -X POST "url" -H 
- * "Ocp-Apim-Subscription-Key: d81d422388e54ee1a763a36fd8643965"
- *  -H "Content-Type: application/json" -d 
- * "{\"top\":3,
- * \"question\":\"YOUR_QUESTION_HERE\",
- * \"includeUnstructuredSources\":true,
- * \"confidenceScoreThreshold\":\"YOUR_SCORE_THRESHOLD_HERE\",
- * \"answerSpanRequest\"
- * :{\"enable\":true,
- * \"topAnswersWithSpan\":1,
- * \"confidenceScoreThreshold\":\"YOUR_SCORE_THRESHOLD_HERE\"},
- * \"filters\":{\"metadataFilter\":
- * {\"logicalOperation\":\"YOUR_LOGICAL_OPERATION_HERE\",
- * \"metadata\":[{\"key\":\"YOUR_ADDITIONAL_PROP_KEY_HERE\",\"value\":\"YOUR_ADDITIONAL_PROP_VALUE_HERE\"}]}}}"
- */
