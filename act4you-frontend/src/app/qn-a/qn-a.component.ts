@@ -3,15 +3,12 @@ import { QnaService } from '../services/azure-qna.service';
 import { env } from '../services/env';
 import { NgxMicrosoftBotFrameworkModule } from '@solutionspme/ngx-microsoft-bot-framework';
 import { BotDirective, BotHelperDirective, StyleSetDirective, BotService, ComService, IPayload, DEFAULT_OPTIONS } from '@solutionspme/ngx-microsoft-bot-framework';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-qn-a',
   standalone: true,
-  imports: [NgxMicrosoftBotFrameworkModule, CommonModule, BrowserModule, BrowserAnimationsModule, HttpClientModule],
+  imports: [],
+  providers: [BotService, ComService, BotDirective, BotHelperDirective, StyleSetDirective],
   templateUrl: './qn-a.component.html',
   styleUrl: './qn-a.component.scss'
 })
@@ -48,14 +45,14 @@ export class QnAComponent implements OnInit {
     rootHeight: '100%',
     botAvatarInitials: 'AC',
     userAvatarInitials: 'US',
-    backgroundColor: 'red',
+    backgroundColor: 'white',
   };
 
   constructor(private qnaService: QnaService, private comService: ComService,
     private botDirective: BotDirective) { }
 
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.obtainStylePayload();
     this.obtainLocalToken();
   }
