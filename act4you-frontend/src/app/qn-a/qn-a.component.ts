@@ -26,13 +26,13 @@ export class QnAComponent implements OnInit {
 
   stylesetPayload: DEFAULT_OPTIONS = {
     rootHeight: '100%',
-    botAvatarInitials: 'BF',
-    userAvatarInitials: 'CH',
+    botAvatarInitials: 'BO',
+    userAvatarInitials: 'US',
     backgroundColor: '#131313',
     root: {
       /* width */
       ' ::-webkit-scrollbar': {
-        width: '3px'
+        width: '5px'
       },
     },
     textContent: {
@@ -45,7 +45,7 @@ export class QnAComponent implements OnInit {
     rootHeight: '100%',
     botAvatarInitials: 'AC',
     userAvatarInitials: 'US',
-    backgroundColor: 'white',
+    backgroundColor: '#CCC',
   };
 
   constructor(private qnaService: QnaService, private comService: ComService,
