@@ -46,10 +46,21 @@ export class AnnuncioService {
     return listAnnunci;
   }
 
-  async getAnnuncioById(id: string) {
-    // ricerca un annuncio dato un id
-    var response = await this.container.item(id).read()
-    return response.resource
+  async getAnnunciById(id: string) {
+    // ricerca un annuncio dato un id utente
+    const querySpec = { query: "SELECT * FROM Annunci a where a.idUtente=@idUt", parameters: [{
+      name: "@idUt",
+      value: id,
+  }], };
+
+    var listAnnunci: any = [];
+    var {resources: results} = await this.annunci.query(querySpec).fetchAll();
+     for (var queryResult of results) {
+      let resultString = JSON.stringify(queryResult)
+      let resultObj = JSON.parse(resultString);
+      listAnnunci.push(resultObj);
+    }
+    return listAnnunci;
   }
 
   //rimuove un annuncio

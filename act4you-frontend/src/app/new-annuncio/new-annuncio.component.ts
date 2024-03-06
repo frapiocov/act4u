@@ -44,7 +44,7 @@ export class NewAnnuncioComponent implements OnInit {
 
   // retrieve degli annunci
   async getAnnunci() {
-    this.annunci = await this.annService.getAnnunci();
+    this.annunci = await this.annService.getAnnunciById(this.token);
   }
 
   deleteAnnuncio(ann: Annuncio) {
@@ -64,9 +64,12 @@ export class NewAnnuncioComponent implements OnInit {
     this.newAnn.agency = this.annForm.value.agency!;
     this.newAnn.contact = this.annForm.value.contact!;
     this.newAnn.type = this.selectedTeam;
+    this.newAnn.idUtente = sessionStorage.getItem('accToken')!;
+    this.newAnn.nomeUtente = sessionStorage.getItem('accName')!;
 
     this.annService.addAnnuncio(this.newAnn);
     this.annunci.push(this.newAnn);
+
   }
 
 }

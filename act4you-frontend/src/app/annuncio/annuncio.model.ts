@@ -6,4 +6,6 @@ export class Annuncio {
     type:string;
     data:string;
     contact: string;
+    idUtente: string;
+    nomeUtente: string;
 }
