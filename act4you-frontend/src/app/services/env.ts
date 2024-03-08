@@ -20,5 +20,7 @@ export const env = {
     },
     qnaEndpoint:"https://QnA-act4u-bot-ddf3.azurewebsites.net/api/messages",
     qnaBotKey:"IqR16y1B5qY.6KgkxJZ9jVYSjKQEXTjwvfwuuLLAw6MC0NhEjiu_87s",
-    languageStudioId:"d81d422388e54ee1a763a36fd8643965"
+    languageStudioId:"d81d422388e54ee1a763a36fd8643965",
+    vapidPublicKey: "BD9XxPmlmcflpnNpuh6CDUpZe_a3wYkwmv1FDoyNjQIS_ljUQj5x8D1j16m7SFWTzgtyj0wwmI5079ynRt1LLYc", 
+    vapidPrivateKey:"aUlBd7mgLa5jOpU0QXjAIveQKrbZoVFCVyWjcrOABgs" 
   };

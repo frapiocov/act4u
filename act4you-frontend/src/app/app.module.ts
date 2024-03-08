@@ -33,7 +33,9 @@ import {
   MsalInterceptor,
 } from '@azure/msal-angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-/* import { ServiceWorkerModule } from '@angular/service-worker'; */
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { DialogData } from './annuncio/annuncio.component';
+
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -97,12 +99,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MsalModule,
     ReactiveFormsModule,
     NgxMicrosoftBotFrameworkModule,
-    /* ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }) */
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: true,
+      registrationStrategy: 'registerWhenStable:20000'
+    }),
   ],
   providers: [
     {

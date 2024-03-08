@@ -1,0 +1,32 @@
+<div class="content">
+  <h2 mat-dialog-title>Candidati all'annuncio</h2>
+  <mat-dialog-content>
+    <p>Aggiungi i file utili alla candidatura (video, foto, Curriculum)...</p>
+    
+    <span style="height: 50px;"></span>
+
+    <input (change)="onFileSelected($event)" multiple="true" type="file" #fileUpload />
+    
+    
+    <div class="file-upload">
+      <p>
+        {{fileNames || "Nessun file ancora caricato."}}
+      </p>
+    </div>
+    
+    <!-- <mat-form-field>
+      <mat-label>Link utili</mat-label>
+      <input matInput />
+    </mat-form-field> -->
+
+    <button (click)="uploadFile()">Carica</button>
+   
+    <mat-progress-bar
+      mode="indeterminate"
+      id="loadbar"
+      *ngIf="uploadProgress"
+    ></mat-progress-bar>
+    
+    <p id="correctUpload" *ngIf="uploaded">File caricati correttamente!</p>
+  </mat-dialog-content>
+</div>
