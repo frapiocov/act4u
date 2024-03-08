@@ -6,10 +6,10 @@ import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 })
 export class AzureBlobStorageService{
 
-    accountName = "act4ublob";
-    imageSasToken = "sp=racwdl&st=2024-02-09T16:10:27Z&se=2025-02-10T00:10:27Z&spr=https&sv=2022-11-02&sr=c&sig=cKdvWUUsUlTblCRZsrKsn1j0CrGVFHPVnIm%2BNBfDcbs%3D";
-    videoSasToken = "sp=racwdl&st=2024-02-05T11:02:34Z&se=2025-02-05T19:02:34Z&sv=2022-11-02&sr=c&sig=CDyByVL2eXkYdWOxCfcu0GMdFcaawbSZLrCjOnkdtho%3D";
-    fileSasToken = "sp=racwdl&st=2024-02-09T16:08:14Z&se=2025-01-10T00:08:14Z&spr=https&sv=2022-11-02&sr=c&sig=TzNnNAbzNWEOXqacCtB3nTlWH6n46oFpEl9%2FJeqBQ3w%3D";
+    accountName = "act4ublob2";
+    imageSasToken = "sp=r&st=2024-02-29T19:50:24Z&se=2025-07-01T02:50:24Z&sv=2022-11-02&sr=c&sig=nQO%2BfAQ9Rt1lxeAKM0NRo9Ali8zoHt3ElVHB6gPlPSc%3D";
+    videoSasToken = "sp=racwdli&st=2024-02-29T19:51:50Z&se=2025-04-02T02:51:50Z&sv=2022-11-02&sr=c&sig=LRGeDugcJMlDUf%2B6ynZZag%2FncuY2KPBZSFGC57ntXY0%3D";
+    fileSasToken = "sp=racwdli&st=2024-02-29T19:49:49Z&se=2025-04-01T02:49:49Z&sv=2022-11-02&sr=c&sig=ciDCdlft2%2BJxctpCKvUe%2FSbfPqWYcwyv4pIHlxyLxIo%3D";
 
     constructor() {}
 
