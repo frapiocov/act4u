@@ -4,8 +4,7 @@ import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { EventMessage, EventType, AuthenticationResult } from '@azure/msal-browser';
 import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { AnnuncioService } from '../services/azure-cosmosdb.service';
-import { Annuncio } from '../annuncio/annuncio.model';
+import { CosmosDBService } from '../services/azure-cosmosdb.service';
 import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AllowNotComponent } from '../allow-not/allow-not.component';
@@ -22,7 +21,7 @@ export class HomepageComponent implements OnInit {
   loginDisplay = false;
   annunci: any[] = [];
 
-  constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService, private annService: AnnuncioService) { }
+  constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService, private annService: CosmosDBService) { }
 
   ngOnInit(): void {
     this.msalBroadcastService.msalSubject$

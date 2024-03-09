@@ -7,16 +7,22 @@ import { env } from './env.js'
 @Injectable({
   providedIn: 'root'
 })
-export class AnnuncioService {
+export class CosmosDBService {
 
   database: Database;
+  
   container: Container;
+  containerCand:Container;
+
+
   client: CosmosClient;
+  
   annunci: Items;
+  
   partitionKey = {kind:'Hash', paths:['/annuncidb']};
   option = {
-    endpoint: env.endpoint,
-    key: env.key,
+    endpoint: env.cosmosEndpoint,
+    key: env.cosmosKey,
     userAgentSuffix:'Act4You'
   };
 
@@ -28,9 +34,10 @@ export class AnnuncioService {
   initializeDB() {
     this.client = new CosmosClient(this.option);
 
-    this.annunci = this.client.database(env.databaseName).container(env.collectionName).items;
-    this.database = this.client.database(env.databaseName);
-    this.container = this.client.database(env.databaseName).container(env.collectionName);
+    this.annunci = this.client.database(env.cosmosDBName).container(env.collectionAnnunci).items;
+    this.database = this.client.database(env.cosmosDBName);
+    this.container = this.client.database(env.cosmosDBName).container(env.collectionAnnunci);
+    this.containerCand = this.client.database(env.cosmosDBName).container(env.collectionCandidature);
   }
 
   async getAnnunci() {
@@ -73,6 +80,10 @@ export class AnnuncioService {
   async addAnnuncio(ann: Annuncio) {
     await this.container.items.upsert(ann);
     console.log("item added");
+  }
+
+  async addCandidatura(cand: any) {
+    await this.containerCand.items.upsert(cand);
   }
 
   async updateAnnuncio(ann: Annuncio) {
