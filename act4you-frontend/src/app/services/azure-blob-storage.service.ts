@@ -7,7 +7,7 @@ import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
 export class AzureBlobStorageService{
 
     accountName = "act4ublob2";
-    imageSasToken = "sp=r&st=2024-02-29T19:50:24Z&se=2025-07-01T02:50:24Z&sv=2022-11-02&sr=c&sig=nQO%2BfAQ9Rt1lxeAKM0NRo9Ali8zoHt3ElVHB6gPlPSc%3D";
+    imageSasToken = "sp=racwdli&st=2024-03-10T11:31:21Z&se=2025-02-02T19:31:21Z&sv=2022-11-02&sr=c&sig=pAx6yBJbbZF6vl4dbOqKVsdgJL2tXTKP1qDPDTyCfQc%3D";
     videoSasToken = "sp=racwdli&st=2024-02-29T19:51:50Z&se=2025-04-02T02:51:50Z&sv=2022-11-02&sr=c&sig=LRGeDugcJMlDUf%2B6ynZZag%2FncuY2KPBZSFGC57ntXY0%3D";
     fileSasToken = "sp=racwdli&st=2024-02-29T19:49:49Z&se=2025-04-01T02:49:49Z&sv=2022-11-02&sr=c&sig=ciDCdlft2%2BJxctpCKvUe%2FSbfPqWYcwyv4pIHlxyLxIo%3D";
 
