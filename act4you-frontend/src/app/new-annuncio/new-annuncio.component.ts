@@ -3,7 +3,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { AnnuncioService } from '../services/azure-cosmosdb.service';
+import { CosmosDBService } from '../services/azure-cosmosdb.service';
 import { Annuncio } from '../annuncio/annuncio.model';
 import { AnnuncioComponent } from '../annuncio/annuncio.component';
 import * as uuid from 'uuid';
@@ -34,7 +34,7 @@ export class NewAnnuncioComponent implements OnInit {
 
   selectedTeam = '';
 
-  constructor(private annService: AnnuncioService) { }
+  constructor(private cosmosService: CosmosDBService) { }
 
   ngOnInit() {
     this.token = sessionStorage.getItem('accToken')!;
@@ -44,11 +44,11 @@ export class NewAnnuncioComponent implements OnInit {
 
   // retrieve degli annunci
   async getAnnunci() {
-    this.annunci = await this.annService.getAnnunciById(this.token);
+    this.annunci = await this.cosmosService.getAnnunciById(this.token);
   }
 
   deleteAnnuncio(ann: Annuncio) {
-    this.annService.deleteAnnuncio(ann);
+    this.cosmosService.deleteAnnuncio(ann);
     window.location.reload();  
   }
 
@@ -67,7 +67,7 @@ export class NewAnnuncioComponent implements OnInit {
     this.newAnn.idUtente = sessionStorage.getItem('accToken')!;
     this.newAnn.nomeUtente = sessionStorage.getItem('accName')!;
 
-    this.annService.addAnnuncio(this.newAnn);
+    this.cosmosService.addAnnuncio(this.newAnn);
     this.annunci.push(this.newAnn);
 
   }

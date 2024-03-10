@@ -5,19 +5,7 @@
     
     <span style="height: 50px;"></span>
 
-    <input (change)="onFileSelected($event)" multiple="true" type="file" #fileUpload />
-    
-    
-    <div class="file-upload">
-      <p>
-        {{fileNames || "Nessun file ancora caricato."}}
-      </p>
-    </div>
-    
-    <!-- <mat-form-field>
-      <mat-label>Link utili</mat-label>
-      <input matInput />
-    </mat-form-field> -->
+    <input (change)="onFileSelected($event)" multiple="true" type="file" />
 
     <button (click)="uploadFile()">Carica</button>
    

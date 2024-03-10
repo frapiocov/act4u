@@ -52,7 +52,7 @@ export class NavbarComponent {
     this.profile = this.authService.instance.getAllAccounts()[0];
     if(this.profile!=null){
       sessionStorage.setItem('accName', this.profile.name!);
-    sessionStorage.setItem('accToken', this.profile.tenantId!);
+      sessionStorage.setItem('accToken', this.profile.tenantId!);
     }
     
   }
@@ -90,6 +90,8 @@ export class NavbarComponent {
         postLogoutRedirectUri: "/",
       });
     }
+      sessionStorage.setItem('accName', "");
+      sessionStorage.setItem('accToken', "");
   }
 
   ngOnDestroy(): void {
