@@ -15,6 +15,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AzureBlobStorageService } from '../services/azure-blob-storage.service';
 import * as uuid from 'uuid';
 import { CosmosDBService } from '../services/azure-cosmosdb.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @Component({
@@ -97,7 +98,7 @@ export class DialogData {
 @Component({
   selector: 'app-annuncio',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, DialogData],
+  imports: [MatCardModule, MatButtonModule, CommonModule, DialogData, MatDividerModule],
   templateUrl: './annuncio.component.html',
   styleUrl: './annuncio.component.scss'
 })

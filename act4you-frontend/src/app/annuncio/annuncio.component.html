@@ -7,9 +7,16 @@
     <p>
       {{ann.desc}}
     </p>
-    <p>{{ann.type}} --
-    {{ann.data}} --
-    {{ann.contact}}</p>
+    <mat-divider [inset]="true"></mat-divider>
+    <p style="font-weight: bold;">
+      {{ann.type}}
+    </p>
+    <p>
+     Pubblicato il {{ann.data}} 
+    </p>
+    <p>
+      Contattaci alla seguente: {{ann.contact}}
+    </p>
   </mat-card-content>
   <mat-card-footer>
     <button (click)="openDialog()">Candidati!</button>

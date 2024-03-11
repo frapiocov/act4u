@@ -16,6 +16,7 @@ import { NgFor, NgIf } from '@angular/common';
   templateUrl: './new-annuncio.component.html',
   styleUrl: './new-annuncio.component.scss'
 })
+
 export class NewAnnuncioComponent implements OnInit {
   newAnn = new Annuncio(); // l'annuncio da aggiungere
   annunci: any[] = [];
@@ -64,8 +65,8 @@ export class NewAnnuncioComponent implements OnInit {
     this.newAnn.agency = this.annForm.value.agency!;
     this.newAnn.contact = this.annForm.value.contact!;
     this.newAnn.type = this.selectedTeam;
-    this.newAnn.idUtente = sessionStorage.getItem('accToken')!;
-    this.newAnn.nomeUtente = sessionStorage.getItem('accName')!;
+    this.newAnn.idUtente = this.token;
+    this.newAnn.nomeUtente = this.name;
 
     this.cosmosService.addAnnuncio(this.newAnn);
     this.annunci.push(this.newAnn);

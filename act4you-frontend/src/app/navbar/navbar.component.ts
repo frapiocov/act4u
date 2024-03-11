@@ -1,4 +1,4 @@
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
@@ -7,6 +7,16 @@ import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfigur
 import { AccountInfo, AuthenticationResult, InteractionStatus, InteractionType, PopupRequest, RedirectRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
+const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+
+type ProfileType = {
+  givenName?: string,
+  surname?: string,
+  userPrincipalName?: string,
+  id?: string
+}
 
 @Component({
   standalone: true,
@@ -21,6 +31,7 @@ export class NavbarComponent {
   //TODO valorizzare in base al tipo non loggato (undefined), user, admin
   userType: string | undefined = 'admin';
   profile: AccountInfo;
+  profileMicrosoft!: ProfileType;
 
   title = 'ACT FOR YOU';
   isIframe = false;
@@ -30,7 +41,8 @@ export class NavbarComponent {
   constructor(
     private authService: MsalService,
     private msalBroadcastService: MsalBroadcastService,
-    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration
+    @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -44,17 +56,30 @@ export class NavbarComponent {
       .subscribe(() => {
         this.setLoginDisplay();
       });
+    this.setSessionData();
   }
 
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
 
     this.profile = this.authService.instance.getAllAccounts()[0];
-    if(this.profile!=null){
-      sessionStorage.setItem('accName', this.profile.name!);
-      sessionStorage.setItem('accToken', this.profile.tenantId!);
+    if (this.profile == null) {
+      this.loginDisplay = false;
     }
-    
+  }
+
+  async setSessionData() {
+    this.http.get(GRAPH_ENDPOINT)
+      .subscribe(profile => {
+        this.profileMicrosoft = profile;
+        sessionStorage.setItem('accName', this.profile.name!);
+        sessionStorage.setItem('accToken', this.profileMicrosoft.id!);
+      });
+
+    if (this.profileMicrosoft != undefined || this.profile != undefined) {
+      sessionStorage.setItem('accName', this.profile.name!);
+      sessionStorage.setItem('accToken', this.profileMicrosoft.id!);
+    }
   }
 
   login() {
@@ -90,8 +115,8 @@ export class NavbarComponent {
         postLogoutRedirectUri: "/",
       });
     }
-      sessionStorage.setItem('accName', "");
-      sessionStorage.setItem('accToken', "");
+    sessionStorage.setItem('accName', "");
+    sessionStorage.setItem('accToken', "");
   }
 
   ngOnDestroy(): void {

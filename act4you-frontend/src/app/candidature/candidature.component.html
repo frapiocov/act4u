@@ -1,9 +1,26 @@
-<p>candidature works!</p>
-upload: <input type="file" (change)="fileSelected($event)">
-<table>
+<div class="main">
+  <h2>Sezione Candidature</h2>
+  <p>
+    Per ogni annuncio da te pubblicato sono presenti le varie candidature con
+    annessi file.
+  </p>
+
+  <div>
+    <li *ngFor="let ann of annunci" style="list-style-type: none;">
+      <div class="container">
+        <app-cand-card [ann]="ann"></app-cand-card>
+      </div>
+    </li>
+  </div>
+  
+  <!-- upload: <input type="file" (change)="fileSelected($event)" />
+  <table>
     <tr *ngFor="let pic of imagesList">
-        <td>{{pic}}</td>
-        <td><button (click)="downloadImage(pic)" donload="pic">DOWNLOAD</button></td>
-        <td><button (click)="deleteImage(pic)">DELETE</button></td>
+      <td>{{ pic }}</td>
+      <td>
+        <button (click)="downloadImage(pic)" donload="pic">DOWNLOAD</button>
+      </td>
+      <td><button (click)="deleteImage(pic)">DELETE</button></td>
     </tr>
-</table>
+  </table> -->
+</div>

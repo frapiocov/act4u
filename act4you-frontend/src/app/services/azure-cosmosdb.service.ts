@@ -14,10 +14,10 @@ export class CosmosDBService {
   container: Container;
   containerCand:Container;
 
-
   client: CosmosClient;
   
   annunci: Items;
+  candidature: Items;
   
   partitionKey = {kind:'Hash', paths:['/annuncidb']};
   option = {
@@ -35,6 +35,8 @@ export class CosmosDBService {
     this.client = new CosmosClient(this.option);
 
     this.annunci = this.client.database(env.cosmosDBName).container(env.collectionAnnunci).items;
+    this.candidature = this.client.database(env.cosmosDBName).container(env.collectionCandidature).items;
+
     this.database = this.client.database(env.cosmosDBName);
     this.container = this.client.database(env.cosmosDBName).container(env.collectionAnnunci);
     this.containerCand = this.client.database(env.cosmosDBName).container(env.collectionCandidature);
@@ -68,6 +70,23 @@ export class CosmosDBService {
       listAnnunci.push(resultObj);
     }
     return listAnnunci;
+  }
+
+  async getCandByAnnuncio(id: string) {
+    // ricerca le candidature dato un annuncio
+    const querySpec = { query: "SELECT * FROM Candidature c where c.annuncio=@id", parameters: [{
+      name: "@id",
+      value: id,
+  }], };
+
+    var listCandidature: any = [];
+    var {resources: results} = await this.candidature.query(querySpec).fetchAll();
+     for (var queryResult of results) {
+      let resultString = JSON.stringify(queryResult)
+      let resultObj = JSON.parse(resultString);
+      listCandidature.push(resultObj);
+    }
+    return listCandidature;
   }
 
   //rimuove un annuncio

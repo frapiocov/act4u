@@ -1,27 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AzureBlobStorageService } from '../services/azure-blob-storage.service';
+import { CosmosDBService } from '../services/azure-cosmosdb.service';
 import { CommonModule } from '@angular/common';
+import { CandCardComponent } from '../cand-card/cand-card.component';
 
 @Component({
   selector: 'app-candidature',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CandCardComponent],
   templateUrl: './candidature.component.html',
   styleUrl: './candidature.component.scss'
 })
-export class CandidatureComponent {
+export class CandidatureComponent implements OnInit{
   imagesList: string[];
   videoList: string[];
   filesList: string[];
 
+  annunci: any[];
+  fileListAnnuncio: any[];
+  userToken = "";
+  userName = "";
+
   constructor(
-    private blobService: AzureBlobStorageService
+    private blobService: AzureBlobStorageService,
+    private cosmosService: CosmosDBService
   ){
-    this.reloadImagesList();
+    /* this.reloadImagesList();
     this.reloadFilesList();
-    this.reloadVideoList();
+    this.reloadVideoList(); */
   }
 
+  ngOnInit(): void {
+    this.userToken = sessionStorage.getItem('accToken')!;
+    this.getAnnunciByUser(this.userToken);
+  }
+/* 
   public imageSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input && input.files) {
@@ -73,7 +86,7 @@ export class CandidatureComponent {
     this.blobService.deleteVideo(name, () =>{
       this.reloadVideoList();
     });
-  }
+  } */
 
   public downloadImage (name: string) {
     this.blobService.downloadImage(name, blob => {
@@ -117,4 +130,10 @@ export class CandidatureComponent {
       console.log('Files', this.filesList);
     })
   }
+
+
+  async getAnnunciByUser(token: string){
+    this.annunci = await this.cosmosService.getAnnunciById(token);
+  }
+
 }

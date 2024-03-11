@@ -29,7 +29,7 @@ export class QnaService {
       .subscribe(
         responseActivity => {
           const responseText = responseActivity; // Accedi al testo della risposta
-          console.log('Bot response:', responseText);
+          //console.log('Bot response:', responseText);
         },
         error => {
           console.log('Error receiving activity:', error);
