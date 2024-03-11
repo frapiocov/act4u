@@ -21,6 +21,10 @@ export class AzureBlobStorageService{
         return `https://${this.accountName}.blob.core.windows.net/videos/${blobName}`;
     }
 
+    getFileUrl(blobName: string): string {
+        return `https://${this.accountName}.blob.core.windows.net/files/${blobName}`;
+    }
+
     public downloadImage(name: string, handler: (blob:Blob) => void){
         const blobClient = this.containerClient('pictures').getBlobClient(name);
         blobClient.download().then(resp => {

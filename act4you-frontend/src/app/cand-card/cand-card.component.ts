@@ -6,6 +6,7 @@ import { AzureBlobStorageService } from '../services/azure-blob-storage.service'
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 class CandidaturaUtente {
   idUtente: string; // string or undefined
@@ -15,7 +16,7 @@ class CandidaturaUtente {
 @Component({
   selector: 'app-cand-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, CommonModule, MatListModule, MatDividerModule],
+  imports: [PdfViewerModule, MatCardModule, MatButtonModule, CommonModule, MatListModule, MatDividerModule],
   templateUrl: './cand-card.component.html',
   styleUrl: './cand-card.component.scss'
 })
@@ -88,27 +89,15 @@ export class CandCardComponent implements OnInit {
   }
 
   public downloadImage(name: string) {
-    this.blobService.downloadImage(name, blob => {
-      let url = window.URL.createObjectURL(blob);
-      return url;
-    })
-    return "";
+    return this.blobService.getImageUrl(name);
   }
 
   public downloadFile(name: string) {
-    this.blobService.downloadFile(name, blob => {
-      let url = window.URL.createObjectURL(blob);
-      return url;
-    })
-    return "";
+    return this.blobService.getFileUrl(name);
   }
 
   public downloadVideo(name: string) {
-    this.blobService.downloadVideo(name, blob => {
-      let url = window.URL.createObjectURL(blob);
-      return url;
-    })
-    return "";
+    return this.blobService.getVideoUrl(name);
   }
 
   // costruisco l'insieme dei file per ogni utente

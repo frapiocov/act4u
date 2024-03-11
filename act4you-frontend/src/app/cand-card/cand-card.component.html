@@ -11,20 +11,17 @@
       {{ ann.desc }}
     </p>
     <h2>Candidature</h2>
-    
+
     <mat-divider></mat-divider>
     <mat-list *ngFor="let item of filesCandidati">
-  
       <mat-list-item *ngFor="let file of item.files">
-        <img mat-card-image [src]="file" alt="Photo" width="120"/>
-        
+        <img mat-card-image [src]="file" alt="Photo" width="120" />
+        <!-- <pdf-viewer [src]="file"
+              [render-text]="true"
+              [original-size]="false"
+  ></pdf-viewer> -->
       </mat-list-item>
     </mat-list>
     <mat-divider></mat-divider>
-
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
 </mat-card>
