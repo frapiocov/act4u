@@ -37,6 +37,7 @@ export class DialogData {
     utente: "",
     annuncio: "",
     file: "",
+    type: ""
   }
 
   constructor(
@@ -47,6 +48,7 @@ export class DialogData {
 
   public uploadFile() {
     this.uploadProgress = true;
+    let filetype: string = "";
 
     if (this.files) {
 
@@ -56,7 +58,9 @@ export class DialogData {
         this.idFile = uuid.v4();
 
         // upload su blob in base al tipo di dato
-        switch (file.name.split('?')[0].split('.').pop()) {
+        filetype = file.name.split('?')[0].split('.').pop()!;
+
+        switch (filetype) {
           case "pdf":
             this.blobService.uploadFile(file, this.idFile, () => { });
             break;
@@ -78,6 +82,7 @@ export class DialogData {
       this.associateIds.annuncio = this.data.idAnn;
       this.associateIds.utente = sessionStorage.getItem("accToken")!;
       this.associateIds.file = this.idFile;
+      this.associateIds.type = filetype;
       //upload in cosmos dell'associazione file-annuncio-utente
       this.cosmosService.addCandidatura(this.associateIds);
     }

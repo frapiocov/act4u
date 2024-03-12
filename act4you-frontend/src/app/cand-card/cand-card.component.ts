@@ -24,14 +24,14 @@ export class CandCardComponent implements OnInit {
   @Input() ann: any;
 
   /**
-   * {utente, annuncio, file}
+   * {utente, annuncio, file, type}
    */
   candidati: any[] = [];
 
   // lista di file associati ad ogni utente
   /**
    * {
-   * idutente, lista file []
+   * idutente, lista file [{file,type}]
    * }
    */
   filesCandidati: CandidaturaUtente[] = [];
@@ -62,30 +62,30 @@ export class CandCardComponent implements OnInit {
   }
 
   // dato l'utente, carica da blob tutti i suoi dati
-  addFileToUser(pos: number, idFile: string) {
-    let url: string;
+  addFileToUser(pos: number, idFile: string, type: string) {
+    let url: string = "";
 
+    switch (type) {
+      case "png" || "jpeg" || "jpg":
+        url = this.downloadImage(idFile);
+        break;
+      case "mp4":
+        url = this.downloadVideo(idFile);
+        break;
+      case "pdf":
+        url = this.downloadFile(idFile);
+        break;
+      default:
+        break;
+    }
+
+    let urlType = {
+      url: url,
+      type: type
+    };
+
+    this.filesCandidati[pos].files.push(urlType);
     // controlla se è un'immagine
-    url = this.downloadImage(idFile);
-    //console.log("url immagine:", url);
-    if (url !== "" || url != null || url != undefined) {
-      this.filesCandidati[pos].files.push(url);
-      return;
-    }
-
-    // controlla se è un file
-    url = this.downloadFile(idFile);
-    if (url !== "" || url != null || url != undefined) {
-      this.filesCandidati[pos].files.push(url);
-      return;
-    }
-
-    // controlla se è un video
-    url = this.downloadVideo(idFile);
-    if (url !== "" || url != null || url != undefined) {
-      this.filesCandidati[pos].files.push(url);
-      return;
-    }
   }
 
   public downloadImage(name: string) {
@@ -115,7 +115,7 @@ export class CandCardComponent implements OnInit {
         this.filesCandidati.push(item);
 
       //this.filesCandidati[pos].files.push(this.candidati[index].file)  
-      this.addFileToUser(pos, this.candidati[index].file);
+      this.addFileToUser(pos, this.candidati[index].file, this.candidati[index].type);
     }
 
   }

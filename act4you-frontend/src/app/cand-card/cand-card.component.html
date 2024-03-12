@@ -1,27 +1,42 @@
-<mat-card class="card">
+<div class="card">
   <mat-card-header>
     <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>{{ ann.title }}</mat-card-title>
-    <mat-card-subtitle>{{ ann.agency }}</mat-card-subtitle>
+    <h2>{{ ann.title }}</h2>
+    <h3 style="font-weight: bold">{{ ann.agency }}</h3>
   </mat-card-header>
 
   <!--- for che mostra tutti i file -->
-  <mat-card-content>
+  <div>
     <p>
       {{ ann.desc }}
     </p>
     <h2>Candidature</h2>
 
     <mat-divider></mat-divider>
-    <mat-list *ngFor="let item of filesCandidati">
-      <mat-list-item *ngFor="let file of item.files">
-        <img mat-card-image [src]="file" alt="Photo" width="120" />
-        <!-- <pdf-viewer [src]="file"
-              [render-text]="true"
-              [original-size]="false"
-  ></pdf-viewer> -->
-      </mat-list-item>
-    </mat-list>
+
+    <div class="cand-list" *ngFor="let item of filesCandidati">
+      <div *ngFor="let file of item.files" style="margin: 0.5rem">
+        <div
+          *ngIf="
+            file.type === 'jpg' || file.type === 'png' || file.type === 'jpeg'
+          "
+        >
+          <img [src]="file.url" alt="Photo" width="120" />
+        </div>
+        <div *ngIf="file.type === 'mp4'">
+          <video [src]="file.url" width="200" height="200"></video>
+        </div>
+        <div *ngIf="file.type === 'pdf'">
+          <pdf-viewer
+            [src]="file.url"
+            [render-text]="true"
+            [original-size]="false"
+            style="width: 300px; height: 400px"
+          ></pdf-viewer>
+        </div>
+      </div>
+    </div>
+
     <mat-divider></mat-divider>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
