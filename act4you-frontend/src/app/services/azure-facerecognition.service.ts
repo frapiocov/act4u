@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +8,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class FaceRecognitionService {
 
     constructor(private http: HttpClient) {  }
-    
-    private url = 'https://switzerlandnorth.api.cognitive.microsoft.com/face/v1.0/detect';
 
     getFace(imageUrl: string){
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key': '171bf71884b7428bae7fc616e7b3d56d'
+            'Ocp-Apim-Subscription-Key': environment.faceRecognitionKey
         })
-        return this.http.post(this.url, {url:imageUrl}, {headers: headers});
+        return this.http.post(environment.faceRecognitionUrl, {url:imageUrl}, {headers: headers});
     }
 
 }

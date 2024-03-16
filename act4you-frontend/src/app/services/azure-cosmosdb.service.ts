@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Annuncio } from '../annuncio/annuncio.model';
 import { Container, CosmosClient, Items, Database } from '@azure/cosmos';
-import { env } from './env.js'
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,8 @@ export class CosmosDBService {
   
   partitionKey = {kind:'Hash', paths:['/annuncidb']};
   option = {
-    endpoint: env.cosmosEndpoint,
-    key: env.cosmosKey,
+    endpoint: environment.cosmosEndpoint,
+    key: environment.cosmosKey,
     userAgentSuffix:'Act4You'
   };
 
@@ -34,12 +34,12 @@ export class CosmosDBService {
   initializeDB() {
     this.client = new CosmosClient(this.option);
 
-    this.annunci = this.client.database(env.cosmosDBName).container(env.collectionAnnunci).items;
-    this.candidature = this.client.database(env.cosmosDBName).container(env.collectionCandidature).items;
+    this.annunci = this.client.database(environment.cosmosDBName).container(environment.collectionAnnunci).items;
+    this.candidature = this.client.database(environment.cosmosDBName).container(environment.collectionCandidature).items;
 
-    this.database = this.client.database(env.cosmosDBName);
-    this.container = this.client.database(env.cosmosDBName).container(env.collectionAnnunci);
-    this.containerCand = this.client.database(env.cosmosDBName).container(env.collectionCandidature);
+    this.database = this.client.database(environment.cosmosDBName);
+    this.container = this.client.database(environment.cosmosDBName).container(environment.collectionAnnunci);
+    this.containerCand = this.client.database(environment.cosmosDBName).container(environment.collectionCandidature);
   }
 
   async getAnnunci() {

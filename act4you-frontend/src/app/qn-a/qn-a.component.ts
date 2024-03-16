@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { QnaService } from '../services/azure-qna.service';
-import { env } from '../services/env';
-import { NgxMicrosoftBotFrameworkModule } from '@solutionspme/ngx-microsoft-bot-framework';
+import { environment } from '../../environments/environment';
 import { BotDirective, BotHelperDirective, StyleSetDirective, BotService, ComService, IPayload, DEFAULT_OPTIONS } from '@solutionspme/ngx-microsoft-bot-framework';
 
 @Component({
@@ -19,7 +18,7 @@ export class QnAComponent implements OnInit {
   passViewChild: ViewChild;
 
   payload: IPayload = {
-    secret: env.qnaBotKey,
+    secret: environment.qnaBotKey,
     url: 'https://webchat.botframework.com/api/tokens',
     secretSetting: false
   };

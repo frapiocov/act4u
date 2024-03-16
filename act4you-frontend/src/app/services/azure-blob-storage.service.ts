@@ -1,28 +1,25 @@
 import { Injectable } from "@angular/core"
 import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AzureBlobStorageService{
 
-    accountName = "act4ublob2";
-    imageSasToken = "sp=racwdli&st=2024-03-10T11:31:21Z&se=2025-02-02T19:31:21Z&sv=2022-11-02&sr=c&sig=pAx6yBJbbZF6vl4dbOqKVsdgJL2tXTKP1qDPDTyCfQc%3D";
-    videoSasToken = "sp=racwdli&st=2024-02-29T19:51:50Z&se=2025-04-02T02:51:50Z&sv=2022-11-02&sr=c&sig=LRGeDugcJMlDUf%2B6ynZZag%2FncuY2KPBZSFGC57ntXY0%3D";
-    fileSasToken = "sp=racwdli&st=2024-02-29T19:49:49Z&se=2025-04-01T02:49:49Z&sv=2022-11-02&sr=c&sig=ciDCdlft2%2BJxctpCKvUe%2FSbfPqWYcwyv4pIHlxyLxIo%3D";
 
     constructor() {}
 
     getImageUrl(blobName: string): string {
-        return `https://${this.accountName}.blob.core.windows.net/pictures/${blobName}`;
+        return `https://${environment.blobStorageAccountName}.blob.core.windows.net/pictures/${blobName}`;
     }
 
     getVideoUrl(blobName: string): string {
-        return `https://${this.accountName}.blob.core.windows.net/videos/${blobName}`;
+        return `https://${environment.blobStorageAccountName}.blob.core.windows.net/videos/${blobName}`;
     }
 
     getFileUrl(blobName: string): string {
-        return `https://${this.accountName}.blob.core.windows.net/files/${blobName}`;
+        return `https://${environment.blobStorageAccountName}.blob.core.windows.net/files/${blobName}`;
     }
 
     public downloadImage(name: string, handler: (blob:Blob) => void){
@@ -35,13 +32,13 @@ export class AzureBlobStorageService{
     }
 
     public deleteImage( name: string, handler: () =>void){
-        this.containerClient('pictures', this.imageSasToken).deleteBlob(name).then(() =>{
+        this.containerClient('pictures', environment.imageSasToken).deleteBlob(name).then(() =>{
             handler();
         })
     }
 
     public uploadImage( content: Blob, name: string, handler: () =>void){
-        const blockBlobClient = this.containerClient('pictures', this.imageSasToken).getBlockBlobClient(name);
+        const blockBlobClient = this.containerClient('pictures', environment.imageSasToken).getBlockBlobClient(name);
         blockBlobClient.uploadData(content, { blobHTTPHeaders: { blobContentType: content.type}})
         .then(() => handler());
     }
@@ -56,14 +53,14 @@ export class AzureBlobStorageService{
     }
 
     public deleteFile( name: string, handler: () =>void){
-        this.containerClient('files', this.fileSasToken).deleteBlob(name).then(() =>{
+        this.containerClient('files', environment.fileSasToken).deleteBlob(name).then(() =>{
             handler();
         })
     }
 
 
     uploadFile(file: Blob, fileName: string, handler: () => void) {
-        const blockBlobClient = this.containerClient('files', this.fileSasToken).getBlockBlobClient(fileName);
+        const blockBlobClient = this.containerClient('files', environment.fileSasToken).getBlockBlobClient(fileName);
         blockBlobClient.uploadData(file, { blobHTTPHeaders: { blobContentType: file.type}})
         .then(() => handler());
     }
@@ -78,13 +75,13 @@ export class AzureBlobStorageService{
     }
     
     public deleteVideo( name: string, handler: () =>void){
-        this.containerClient('videos', this.videoSasToken).deleteBlob(name).then(() =>{
+        this.containerClient('videos', environment.videoSasToken).deleteBlob(name).then(() =>{
             handler();
         })
     }
 
     public  uploadVideo( content: Blob, name: string, handler: () =>void){
-        const blockBlobClient = this.containerClient('videos', this.videoSasToken).getBlockBlobClient(name);
+        const blockBlobClient = this.containerClient('videos', environment.videoSasToken).getBlockBlobClient(name);
         blockBlobClient.uploadData(content, { blobHTTPHeaders: { blobContentType: content.type}})
         .then(() => handler());
     }
@@ -108,7 +105,7 @@ export class AzureBlobStorageService{
         }
 
         return new BlobServiceClient(
-            `https://${this.accountName}.blob.core.windows.net?${token}`)
+            `https://${environment.blobStorageAccountName}.blob.core.windows.net?${token}`)
             .getContainerClient(containerName);
     }
 }

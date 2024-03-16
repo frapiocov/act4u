@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { env } from '../services/env';
 import { SwPush } from '@angular/service-worker';
 import { NewsletterService } from '../services/newsletter.service';
+import { environment } from '../../environments/environment';
+
 @Component({
   selector: 'app-allow-not',
   standalone: true,
@@ -16,7 +17,7 @@ export class AllowNotComponent {
 
   subscribeToNotification() {
     this.swPush.requestSubscription({
-      serverPublicKey: env.vapidPublicKey
+      serverPublicKey: environment.vapidPublicKey
     })
       .then(sub => {
         console.log("Notification Subscription: ", sub);

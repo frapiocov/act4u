@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DirectLine } from 'botframework-directlinejs';
-import { env } from './env.js'
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QnaService {
 
-  directLine = new DirectLine({ secret: env.qnaBotKey });
+  directLine = new DirectLine({ secret: environment.qnaBotKey });
 
   constructor(private http: HttpClient) { }
 
   sendQuestion(q: string) {
 
     this.directLine.postActivity({
-      from: { id: env.tenantId }, // required
+      from: { id: environment.tenantId }, // required
       type: 'message',
       text: q,
     }).subscribe(
