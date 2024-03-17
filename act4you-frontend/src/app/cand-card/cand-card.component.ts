@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ImageCognitiveService } from '../services/azure-computer-vision';
+import { FaceRecognitionService } from '../services/azure-facerecognition.service';
 
 class CandidaturaUtente {
   idUtente: string; // string or undefined
@@ -23,25 +25,16 @@ class CandidaturaUtente {
 export class CandCardComponent implements OnInit {
   @Input() ann: any;
 
-  /**
-   * {utente, annuncio, file, type}
-   */
   candidati: any[] = [];
-
-  // lista di file associati ad ogni utente
-  /**
-   * {
-   * idutente, lista file [{file,type}]
-   * }
-   */
   filesCandidati: CandidaturaUtente[] = [];
+  filesScartati: CandidaturaUtente[] = [];
+  showDiscardedFiles = false;
 
-  constructor(private blobService: AzureBlobStorageService,
+  constructor(private blobService: AzureBlobStorageService, private imgCognitiveService :ImageCognitiveService, private faceRecognition: FaceRecognitionService,
     private cosmosService: CosmosDBService) {}
 
   async ngOnInit() {
     this.candidati = await this.getFilesByAnnuncio();
-    
     this.getUserFiles();
     //console.log("filecandidati: ",this.filesCandidati);
   }
@@ -66,26 +59,76 @@ export class CandCardComponent implements OnInit {
     let url: string = "";
 
     switch (type) {
-      case "png" || "jpeg" || "jpg":
-        url = this.downloadImage(idFile);
+      case "jpg":
+        this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
+          this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
+            url = this.downloadImage(idFile);
+            console.log(face);
+            if(this.isInvalidImage(picDetails, face)) {
+              this.saveInFileScartati(pos, url, type);
+            } else this.saveInFileCandidati(pos, url, type);
+          });
+        });
+        break;
+      case "jpeg":
+        this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
+          this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
+            url = this.downloadImage(idFile);
+            console.log(face);
+            if(this.isInvalidImage(picDetails, face)) {
+              this.saveInFileScartati(pos, url, type);
+            } else this.saveInFileCandidati(pos, url, type);
+          });
+        });
+        break;
+      case "png":
+        this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
+          this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
+            url = this.downloadImage(idFile);
+            console.log(face);
+            if(this.isInvalidImage(picDetails, face)) {
+              this.saveInFileScartati(pos, url, type);
+            } else this.saveInFileCandidati(pos, url, type);
+          });
+        });
         break;
       case "mp4":
         url = this.downloadVideo(idFile);
+        this.saveInFileCandidati(pos, url, type);
         break;
       case "pdf":
         url = this.downloadFile(idFile);
+        this.saveInFileCandidati(pos, url, type);
         break;
       default:
         break;
     }
+  }
 
+  public saveInFileCandidati(pos: number, url: string, type: string){
     let urlType = {
       url: url,
       type: type
     };
 
+    urlType.url = url;
+    urlType.type = type;
     this.filesCandidati[pos].files.push(urlType);
-    // controlla se è un'immagine
+  }
+
+  public saveInFileScartati(pos: number, url: string, type: string) {
+    const urlType = {
+      url: url,
+      type: type
+    };
+  
+    const newFilesScartatiItem = { ...this.filesScartati[pos], files: [...this.filesScartati[pos].files, urlType] };
+    this.filesScartati[pos] = newFilesScartatiItem;
+  }
+
+  public isInvalidImage(resp: any, face: any): boolean{
+    return resp.color.isBwImg || resp.color.isBWImg || resp.color.isRacyContent || resp.color.isAdultContent || resp.imageType.clipArtType ||
+    resp.imageType.lineDrawingType || face.length === 0;
   }
 
   public downloadImage(name: string) {
@@ -112,13 +155,11 @@ export class CandCardComponent implements OnInit {
       let item = {idUtente: idUtente, files: [] };
 
       if(pos == 0)
-        this.filesCandidati.push(item);
+        this.filesCandidati.push(item); this.filesScartati.push(item);
 
       //this.filesCandidati[pos].files.push(this.candidati[index].file)  
       this.addFileToUser(pos, this.candidati[index].file, this.candidati[index].type);
     }
 
   }
-
-
 }

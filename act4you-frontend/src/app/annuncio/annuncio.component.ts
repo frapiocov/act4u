@@ -67,6 +67,9 @@ export class DialogData {
           case "jpg":
             this.blobService.uploadImage(file, this.idFile, () => { });
             break;
+          case "jpeg":
+            this.blobService.uploadImage(file, this.idFile, () => { });
+            break;
           case "png":
             this.blobService.uploadImage(file, this.idFile, () => { });
             break;

@@ -14,17 +14,13 @@
 
     <mat-divider></mat-divider>
 
-    <div class="cand-list" *ngFor="let item of filesCandidati">
+    <div class="cand-list" *ngFor="let item of filesCandidati" style="display: flex;">
       <div *ngFor="let file of item.files" style="margin: 0.5rem">
-        <div
-          *ngIf="
-            file.type === 'jpg' || file.type === 'png' || file.type === 'jpeg'
-          "
-        >
-          <img [src]="file.url" alt="Photo" width="120" />
+        <div *ngIf="file.type === 'jpg' || file.type === 'png' || file.type === 'jpeg'">
+          <a [href]="file.url"><img [src]="file.url" alt="Photo" width="120"/></a>
         </div>
         <div *ngIf="file.type === 'mp4'">
-          <video [src]="file.url" width="200" height="200"></video>
+          <a [href]="file.url"><video [src]="file.url" width="200" height="200"></video></a>
         </div>
         <div *ngIf="file.type === 'pdf'">
           <pdf-viewer
@@ -37,6 +33,28 @@
       </div>
     </div>
 
+    <button (click)="showDiscardedFiles = !showDiscardedFiles">File scartati</button>
+    <h4  *ngIf="showDiscardedFiles">File Scartati</h4>
+    <div *ngIf="showDiscardedFiles">
+      <div class="cand-list" *ngFor="let item of filesScartati" style="display: flex;">
+        <div *ngFor="let file of item.files" style="margin: 0.5rem">
+          <div *ngIf="file.type === 'jpg' || file.type === 'png' || file.type === 'jpeg'">
+            <a [href]="file.url"><img [src]="file.url" alt="Photo" width="120"/></a>
+          </div>
+          <div *ngIf="file.type === 'mp4'">
+            <a [href]="file.url"><video [src]="file.url" width="200" height="200"></video></a>
+          </div>
+          <div *ngIf="file.type === 'pdf'">
+            <pdf-viewer
+              [src]="file.url"
+              [render-text]="true"
+              [original-size]="false"
+              style="width: 300px; height: 400px"
+            ></pdf-viewer>
+          </div>
+        </div>
+      </div>
+    </div>
     <mat-divider></mat-divider>
   </div>
 </div>
