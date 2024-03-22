@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ImageCognitiveService } from '../services/azure-computer-vision';
 import { FaceRecognitionService } from '../services/azure-facerecognition.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 class CandidaturaUtente {
   idUtente: string; // string or undefined
@@ -31,7 +32,7 @@ export class CandCardComponent implements OnInit {
   showDiscardedFiles = false;
 
   constructor(private blobService: AzureBlobStorageService, private imgCognitiveService :ImageCognitiveService, private faceRecognition: FaceRecognitionService,
-    private cosmosService: CosmosDBService) {}
+    private cosmosService: CosmosDBService, private http: HttpClient) {}
 
   async ngOnInit() {
     this.candidati = await this.getFilesByAnnuncio();
@@ -160,6 +161,21 @@ export class CandCardComponent implements OnInit {
       //this.filesCandidati[pos].files.push(this.candidati[index].file)  
       this.addFileToUser(pos, this.candidati[index].file, this.candidati[index].type);
     }
+
+  }
+
+  // utilizza ia document intelligence per analizzare il contenuto del file
+  public analyzeFile(url: string) {
+    const dataToSend = {url: url};
+    const headers = new HttpHeaders()
+          .set('Content-Type', 'application/json');
+
+    this.http.post('http://localhost:3000/analyzedoc', JSON.stringify(dataToSend), {
+      headers: headers
+    })
+    .subscribe(data => {
+      console.log("Analisi File:", data);
+    });
 
   }
 }

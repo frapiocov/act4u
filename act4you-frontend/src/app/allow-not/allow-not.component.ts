@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { SwPush } from '@angular/service-worker';
-import { NewsletterService } from '../services/newsletter.service';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -13,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class AllowNotComponent {
 
-  constructor(private swPush: SwPush, private news: NewsletterService) { }
+  constructor(private swPush: SwPush) { }
 
   subscribeToNotification() {
     this.swPush.requestSubscription({
@@ -21,7 +20,7 @@ export class AllowNotComponent {
     })
       .then(sub => {
         console.log("Notification Subscription: ", sub);
-        this.news.addPushSubscriber(sub).subscribe();
+       
       })
       .catch(err => console.error("Could not subscribe to notifications", err));
 
