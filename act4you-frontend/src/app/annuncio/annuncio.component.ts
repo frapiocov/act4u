@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,6 @@ import * as uuid from 'uuid';
 import { CosmosDBService } from '../services/azure-cosmosdb.service';
 import { MatDividerModule } from '@angular/material/divider';
 
-
 @Component({
   selector: 'cand-dialog',
   templateUrl: 'dialog-cand.html',
@@ -35,6 +34,7 @@ export class DialogData {
 
   associateIds = {
     utente: "",
+    nomeUtente: "",
     annuncio: "",
     file: "",
     type: ""
@@ -84,6 +84,7 @@ export class DialogData {
       // costruzione object json da conservare in cosmos
       this.associateIds.annuncio = this.data.idAnn;
       this.associateIds.utente = sessionStorage.getItem("accToken")!;
+      this.associateIds.nomeUtente = sessionStorage.getItem("accName")!;
       this.associateIds.file = this.idFile;
       this.associateIds.type = filetype;
       //upload in cosmos dell'associazione file-annuncio-utente
@@ -110,13 +111,20 @@ export class DialogData {
   templateUrl: './annuncio.component.html',
   styleUrl: './annuncio.component.scss'
 })
-export class AnnuncioComponent {
+export class AnnuncioComponent implements OnInit{
 
   constructor(public dialog: MatDialog) { }
 
   @Input() ann: any;
   userType: string | undefined = 'user';
+  loginDisplay: boolean = false;
 
+  ngOnInit(): void {
+      let token: string = sessionStorage.getItem("accToken")!;  
+      if( token != "" && token != null){
+        this.loginDisplay = true;
+      }
+  }
 
   public openDialog() {
     this.dialog.open(DialogData, {

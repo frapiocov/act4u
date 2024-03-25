@@ -13,6 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 class CandidaturaUtente {
   idUtente: string; // string or undefined
+  nomeUtente: string;
   files: any[]; // string or undefined
 }
 
@@ -30,6 +31,7 @@ export class CandCardComponent implements OnInit {
   filesCandidati: CandidaturaUtente[] = [];
   filesScartati: CandidaturaUtente[] = [];
   showDiscardedFiles = false;
+  dataFile: any = {};
 
   constructor(private blobService: AzureBlobStorageService, private imgCognitiveService :ImageCognitiveService, private faceRecognition: FaceRecognitionService,
     private cosmosService: CosmosDBService, private http: HttpClient) {}
@@ -64,7 +66,7 @@ export class CandCardComponent implements OnInit {
         this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
           this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
             url = this.downloadImage(idFile);
-            console.log(face);
+            //console.log(face);
             if(this.isInvalidImage(picDetails, face)) {
               this.saveInFileScartati(pos, url, type);
             } else this.saveInFileCandidati(pos, url, type);
@@ -75,7 +77,7 @@ export class CandCardComponent implements OnInit {
         this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
           this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
             url = this.downloadImage(idFile);
-            console.log(face);
+            //console.log(face);
             if(this.isInvalidImage(picDetails, face)) {
               this.saveInFileScartati(pos, url, type);
             } else this.saveInFileCandidati(pos, url, type);
@@ -149,11 +151,12 @@ export class CandCardComponent implements OnInit {
 
     for (let index = 0; index < this.candidati.length; index++) {
       let idUtente : string = this.candidati[index].utente;
+      let nomeUtente : string = this.candidati[index].nomeUtente;
       
       // controllo la posizione dell'utente
       let pos: number = this.checkPosition(idUtente);
 
-      let item = {idUtente: idUtente, files: [] };
+      let item = {idUtente: idUtente, nomeUtente:nomeUtente, files: [] };
 
       if(pos == 0)
         this.filesCandidati.push(item); this.filesScartati.push(item);
@@ -174,7 +177,7 @@ export class CandCardComponent implements OnInit {
       headers: headers
     })
     .subscribe(data => {
-      console.log("Analisi File:", data);
+      this.dataFile = data;
     });
 
   }

@@ -15,9 +15,10 @@
     <mat-divider></mat-divider>
 
     <div class="cand-list" *ngFor="let item of filesCandidati" style="display: flex;">
-      <div *ngFor="let file of item.files" style="margin: 0.5rem">
+      <h3 *ngIf="item.nomeUtente">Candidato: {{ item.nomeUtente }}</h3>
+      <div *ngFor="let file of item.files" style="margin: 0.6rem">
         <div *ngIf="file.type === 'jpg' || file.type === 'png' || file.type === 'jpeg'">
-          <a [href]="file.url"><img [src]="file.url" alt="Photo" width="120"/></a>
+          <a [href]="file.url"><img [src]="file.url" alt="Photo" width="250"/></a>
         </div>
         <div *ngIf="file.type === 'mp4'">
           <a [href]="file.url"><video [src]="file.url" width="200" height="200"></video></a>
@@ -30,6 +31,23 @@
             style="width: 300px; height: 400px"
           ></pdf-viewer>
           <button (click)="analyzeFile(file.url)">Analizza</button>
+          <div *ngIf="dataFile.pages" style="padding: 0.4rem;">
+            <h3>Risultato Analisi Documento:</h3>
+            <p>
+              {{ dataFile.pages }}
+              <br>
+              {{ dataFile.languages }}
+              <br>
+              {{ dataFile.styles }}
+              <br>
+              {{ dataFile.tables }}
+              <br>
+              {{ dataFile.keyValuePairs }}
+              <br>
+              {{ dataFile.documents }}
+            </p>
+
+          </div>
         </div>
       </div>
     </div>
@@ -57,5 +75,6 @@
       </div>
     </div>
     <mat-divider></mat-divider>
+
   </div>
 </div>

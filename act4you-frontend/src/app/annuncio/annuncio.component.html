@@ -19,6 +19,6 @@
     </p>
   </mat-card-content>
   <mat-card-footer>
-    <button (click)="openDialog()">Candidati!</button>
+    <button *ngIf="loginDisplay" (click)="openDialog()">Candidati!</button>
   </mat-card-footer>
 </mat-card>
