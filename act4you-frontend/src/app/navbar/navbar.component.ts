@@ -57,6 +57,7 @@ export class NavbarComponent {
         this.setLoginDisplay();
       });
     this.setSessionData();
+    this.setLoginDisplay();
   }
 
   setLoginDisplay() {

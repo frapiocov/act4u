@@ -173,7 +173,7 @@ export class CandCardComponent implements OnInit {
     const headers = new HttpHeaders()
           .set('Content-Type', 'application/json');
 
-    this.http.post('http://localhost:3000/analyzedoc', JSON.stringify(dataToSend), {
+    this.http.post('https://serverdocint.azurewebsites.net/analyzedoc', JSON.stringify(dataToSend), {
       headers: headers
     })
     .subscribe(data => {
