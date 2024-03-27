@@ -120,7 +120,7 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
-"@angular/animations@^18.13.0":
+"@angular/animations@^18.0.0-next.1":
   version "18.0.0-next.1"
   resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-18.0.0-next.1.tgz#547505b7628e2df72ff2b1396a4a6e11e9d3d179"
   integrity sha512-brK5bbVh/AQI+TyG/RxdUmJ9chsNgD03PnXKWVxrcsZg1aRFovmooTnGfBSCi+0sryuatGC+UfeY6yUcVCLKjg==
