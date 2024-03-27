@@ -7,12 +7,11 @@ import { CommonModule } from '@angular/common';
 import { CosmosDBService } from '../services/azure-cosmosdb.service';
 import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { AllowNotComponent } from '../allow-not/allow-not.component';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [AnnuncioComponent, MatIconModule, NgFor, NgIf, CommonModule, AllowNotComponent],
+  imports: [AnnuncioComponent, MatIconModule, NgFor, NgIf, CommonModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })

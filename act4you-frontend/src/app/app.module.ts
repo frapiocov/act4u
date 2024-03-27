@@ -100,11 +100,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     HttpClientModule,
     MsalModule,
     ReactiveFormsModule,
-    NgxMicrosoftBotFrameworkModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: true,
-      registrationStrategy: 'registerWhenStable:2000'
-    }),
+    NgxMicrosoftBotFrameworkModule
   ],
   providers: [
     {
