@@ -33,7 +33,6 @@ import {
   MsalInterceptor,
 } from '@azure/msal-angular';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ServiceWorkerModule } from '@angular/service-worker';
 import { DialogData } from './annuncio/annuncio.component';
 import { CommonModule } from '@angular/common';
 

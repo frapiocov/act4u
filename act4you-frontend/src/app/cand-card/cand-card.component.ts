@@ -10,6 +10,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ImageCognitiveService } from '../services/azure-computer-vision';
 import { FaceRecognitionService } from '../services/azure-facerecognition.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from "../../environments/environment";
 
 class CandidaturaUtente {
   idUtente: string; // string or undefined
@@ -173,7 +174,7 @@ export class CandCardComponent implements OnInit {
     const headers = new HttpHeaders()
           .set('Content-Type', 'application/json');
 
-    this.http.post('https://serverdocint.azurewebsites.net/analyzedoc', JSON.stringify(dataToSend), {
+    this.http.post(environment.aiDocUrl, JSON.stringify(dataToSend), {
       headers: headers
     })
     .subscribe(data => {

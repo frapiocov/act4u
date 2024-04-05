@@ -33,7 +33,7 @@ export class NavbarComponent {
   profile: AccountInfo;
   profileMicrosoft!: ProfileType;
 
-  title = 'ACT FOR YOU';
+  title = 'ACT4U';
   isIframe = false;
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();

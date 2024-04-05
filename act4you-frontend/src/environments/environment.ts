@@ -31,6 +31,9 @@ export const environment = {
 
     //faceRecognition
     faceRecognitionUrl: '',
-    faceRecognitionKey: ''
+    faceRecognitionKey: '',
+
+    //AIdocumentIntelligence
+    aiDocUrl:'',
 };
 
