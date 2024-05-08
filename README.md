@@ -14,7 +14,8 @@
 </sup>
 </div>
 Covino Francesco Pio - Russo Luca
-=============
+
+--------------
 
 ## Panoramica del progetto
 Act4You nasce come web application sviluppata in Angular per attori/attrici in cerca di ingaggio per film, serieTV, spot pubblicitari, opere teatrali. L’obiettivo è collegare i due mondi offrendo varie funzionalità agli utenti. Si tratta di una piattaforma collaborativa dove ogni utente può inserire i propri annunci e candidarsi a quelli degli altri.
