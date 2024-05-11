@@ -25,9 +25,7 @@ export class AppComponent implements OnInit{
                 })
   }
 
-  //cred = new AzureKeyCredential("fltp0pQ8cmMnpdWTToNSvmVe5EY4cSOSPU5ecyYFiAg=");
-  endpoint = "Endpoint=https://act4upubsub.webpubsub.azure.com;AccessKey=fltp0pQ8cmMnpdWTToNSvmVe5EY4cSOSPU5ecyYFiAg=;Version=1.0;"
-  
+  //cred = new AzureKeyCredential("fltp0pQ8cmMnpdWTToNSvmVe5EY4cSOSPU5ecyYFiAg=");  
   async subscribeNotification() {
 
     /*const serviceClient = new WebPubSubServiceClient(this.endpoint, this.cred, 'pubsub');

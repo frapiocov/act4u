@@ -35,5 +35,13 @@ export const environment = {
 
     //AIdocumentIntelligence
     aiDocUrl:'',
+    //translator
+    traslatorPdfUrl: '',
+    traslatorKey: '',
+    traslatorRegion: '',
+
+    //webpubsub
+    Endpoint: '',
+    wwsLink: ''
 };
 
