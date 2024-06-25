@@ -25,10 +25,10 @@ Act4You offre le seguenti funzionalità:
 1. *Login e registrazione*: L’utente può registrarsi alla piattaforma attraverso il proprio account Microsoft, la gestione di account e credenziali viene svolta con Azure EntraID.
 2. *Pubblicare un annuncio*: L’utente può pubblicare nuovi annunci sulla piattaforma specificando il tipo di lavoro e i vari dettagli.
 3. *Candidarsi ad un annuncio*: L’utente può candidarsi agli annunci degli altri utenti caricando i propri file (foto, video, cv).
-4. Notifiche annunci: L’utente riceve notifiche quando nuovi annunci vengono pubblicati sulla piattaforma
+4. *Notifiche annunci*: L’utente riceve notifiche quando nuovi annunci vengono pubblicati sulla piattaforma
 5. *Sezione QnA*: L’utente ha la possibilità di chattare, nel caso di dubbi sulla piattaforma o sul suo funzionamento, con un bot conversazionale nell’apposita sezione.
-6. *Analisi foto e documenti*: L’utente può analizzare i pdf e le immagini dei candidati ai propri annunci utilizzando funzionalità di IA.
-7. *Traduzione documenti*: L'utente può tradurre automaticamente i documenti in varie lingue.
+6. *Analisi foto*: L’utente può analizzare i pdf e le immagini dei candidati ai propri annunci, i documenti non conformi o che non rispettano le policy (immagini con nudità, immagini senza volto, immagini in bianco e nero) verranno automaticamente scartati tramite AI.
+
 ## Architettura
 ![arch_prog](assets/arch-prog.png)
 
@@ -40,10 +40,10 @@ Act4You utilizza vari servizi di Microsoft Azure per implementare le funzionalit
 4. *Azure Entra ID* (ex Azure Active Directory): gestione credenziali utente
 5. *Azure CosmosDB*: persistenza dei dati relativi agli annunci
 6. *Azure BlobStorage*: persistenza dei dati di grandi dimensioni relativi alle candidature
-7. *Azure Function*: 
-8. *Azure AI Vision*: 
-9. *Azure AI Document Intelligence*: analisi (schemi, lingua, modalità, tabelle) di un documento tramite IA
-10. *Azure AI Translator*: 
+7. *Azure Function*: trigger functions per inviare messaggi a Web PubSub quando viene aggiunto un annuncio
+8. *Azure AI Vision*: controllo sulla conformità delle immagini
+9. *Face Recognition*: controllo sulla conformità delle immagini
+10. *Azure Web PubSub*: messaggi socket per notifiche in app
 
 ## Installazione e avvio 
 Prerequisiti
