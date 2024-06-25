@@ -1,7 +1,70 @@
 .toolbar-spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
   
-  a.title {
-    color: white;
+a.title {
+  color: white;
+}
+
+.toast-container {
+  cursor: pointer;
+  &.success{
+    background-color: #AFE573;
+    color: #155724;
   }
+  width: 340px;
+  height: 100px;
+  margin: 10px;
+  padding: 20px 22px;
+  position: fixed;
+  z-index: 1001;
+  box-shadow: 0 0 12px #999;
+  border-radius: 3px;
+  display: flex;
+
+  .toast-content {
+    align-self: center;
+
+    .title {
+      display: absolute;
+
+      .titolo {
+        display: inline-flex;
+        font-weight: bolder;
+        margin-right: 30px;
+        bottom: 15px;
+      }
+    }
+
+    .closeBtn {
+      position: absolute;
+      right: 20px;
+      bottom: 80px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+
+  .buttonClose {
+    border-radius: 50%;
+    float: left;
+    height: 30px;
+    width: 30px;
+  }
+
+  .cross:after {
+    position: relative;
+    content: "✖";
+    bottom: 5px;
+  }
+
+  &.top-left {
+    left: 0px;
+    top: 75px;
+  }
+
+  &.top-right {
+    right: 0px;
+    top: 75px;
+  }
+}

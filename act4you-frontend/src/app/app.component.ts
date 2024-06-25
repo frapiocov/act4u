@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { webSocket } from 'rxjs/webSocket';
-import { Observable } from 'rxjs';
 import { WebsocketConnectionService } from './services/azure-webpubsub.service';
+import { ToastrService } from './services/notificationmodalservice.service';
 
 @Component({
   selector: 'app-root',
@@ -15,25 +14,36 @@ import { WebsocketConnectionService } from './services/azure-webpubsub.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
-  constructor(private service: WebsocketConnectionService){
+  showToast: boolean = false;
+  message: any;
+
+  constructor(private service: WebsocketConnectionService,
+    private toastr: ToastrService
+  ){
 
   }
+
   ngOnInit(): void {
-    this.service.connect()
-                .subscribe((msg)=>{
-                  console.log(msg)
-                })
+    //this.toastr.showToast('Messaggio di test');
+    this.service.getWS().subscribe((msg)=>{
+      console.log('eccolooo', msg)
+      
+      let ws = new WebSocket(msg.url);
+      ws.onopen = () => console.log('connected');
+
+      ws.onmessage = event => {
+        this.showToast = true;
+        this.toastr.showToast('Messaggio di test');
+        console.log('eccoloooo', event.data)
+      };
+    })
   }
 
-  //cred = new AzureKeyCredential("fltp0pQ8cmMnpdWTToNSvmVe5EY4cSOSPU5ecyYFiAg=");  
-  async subscribeNotification() {
+  goToast(){
 
-    /*const serviceClient = new WebPubSubServiceClient(this.endpoint, this.cred, 'pubsub');
-    let token = await serviceClient.getClientAccessToken();
-    let ws = new WebSocket(token.url);
-    ws.onmessage = function (e) {
-      var server_message = e.data;
-    }*/
-  };
+  }
 
+  closeToast(){
+    this.showToast = false;
+  }
 }
