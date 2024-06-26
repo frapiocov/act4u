@@ -42,8 +42,7 @@ Act4You utilizza vari servizi di Microsoft Azure per implementare le funzionalit
 6. *Azure BlobStorage*: persistenza dei dati di grandi dimensioni relativi alle candidature
 7. *Azure Function*: trigger functions per inviare messaggi a Web PubSub quando viene aggiunto un annuncio
 8. *Azure AI Vision*: controllo sulla conformità delle immagini
-9. *Face Recognition*: controllo sulla conformità delle immagini
-10. *Azure Web PubSub*: messaggi socket per notifiche in app
+9. *Azure Web PubSub*: messaggi socket per notifiche in app
 
 ## Installazione e avvio 
 Prerequisiti
@@ -52,8 +51,7 @@ Prerequisiti
 - Visual Studio Code
 - Angular e Node.js
 
-Effettuare il clone della repository GitHub e installare i pacchetti richiesti con il comando
-```npm install```
-Creare i vari servizi su Azure elencati sopra e modificare i valori delle key per l'accesso alle api nel file *enviroments/environments.ts*. 
+Effettuare il clone della repository GitHub e installare i pacchetti richiesti con il comando `npm install`
+Creare i vari servizi su Azure elencati sopra, scegliendo per ognuno il piano "Free" e modificare i valori delle key per l'accesso alle api nel file *enviroments/environments.ts*.
 
-Da terminale digitare `ng serve --open` per avviare l'applicazione web. In automatico verrà aperta la tab del browser o in alternativa l'url è `http://localhost:4200/`. L'app si ricarica automaticamente in caso di modifica ai source file.
+Per avviare la web app, da terminale digitare `ng serve --open`. In automatico verrà aperta la tab del browser o in alternativa l'url è `http://localhost:4200/`. L'app si ricarica automaticamente in caso di modifica ai source file.
