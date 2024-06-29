@@ -34,7 +34,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongodb": "^6.8.0",
-    "mongoose": "^5.13.22",
+    "mongoose": "^8.4.4",
     "ng2-pdf-viewer": "^10.2.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.6.3",
