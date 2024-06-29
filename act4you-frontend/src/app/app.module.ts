@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
 
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {
   IPublicClientApplication,
   PublicClientApplication,
@@ -85,43 +85,37 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     },
   };
 }
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatListModule,
-    HttpClientModule,
-    MsalModule,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: MsalInterceptor,
-      multi: true,
-    },
-    {
-      provide: MSAL_INSTANCE,
-      useFactory: MSALInstanceFactory,
-    },
-    {
-      provide: MSAL_GUARD_CONFIG,
-      useFactory: MSALGuardConfigFactory,
-    },
-    {
-      provide: MSAL_INTERCEPTOR_CONFIG,
-      useFactory: MSALInterceptorConfigFactory,
-    },
-    MsalService,
-    MsalGuard,
-    MsalBroadcastService,
-    provideAnimationsAsync(),
-  ],
-  bootstrap: [AppComponent, MsalRedirectComponent],
-})
+@NgModule({ declarations: [],
+    bootstrap: [AppComponent, MsalRedirectComponent], imports: [CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatListModule,
+        MsalModule,
+        ReactiveFormsModule], providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: MsalInterceptor,
+            multi: true,
+        },
+        {
+            provide: MSAL_INSTANCE,
+            useFactory: MSALInstanceFactory,
+        },
+        {
+            provide: MSAL_GUARD_CONFIG,
+            useFactory: MSALGuardConfigFactory,
+        },
+        {
+            provide: MSAL_INTERCEPTOR_CONFIG,
+            useFactory: MSALInterceptorConfigFactory,
+        },
+        MsalService,
+        MsalGuard,
+        MsalBroadcastService,
+        provideAnimationsAsync(),
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}
