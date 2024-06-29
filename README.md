@@ -10,7 +10,7 @@
     <h3>
     Progetto del corso di Cloud Computing 2023/2024
     </h3>
-    <h5> Clicca [qui](https://jolly-hill-0cdfd2e03.5.azurestaticapps.net) per visitare la piattaforma </h5>
+    <h4> Clicca <a href="https://jolly-hill-0cdfd2e03.5.azurestaticapps.net">qui</a> per visitare la piattaforma </h4>
     </em>
 </sup>
 </div>
