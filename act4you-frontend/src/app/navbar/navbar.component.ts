@@ -8,6 +8,7 @@ import { AccountInfo, AuthenticationResult, InteractionStatus, InteractionType, 
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { environment } from "../../environments/environment";
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -109,8 +110,8 @@ export class NavbarComponent {
   logout() {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
       this.authService.logoutPopup({
-        postLogoutRedirectUri: "http://localhost:4200/",
-        mainWindowRedirectUri: "http://localhost:4200/"
+        postLogoutRedirectUri: environment.urlSite,
+        mainWindowRedirectUri: environment.urlSite
       });
     } else {
       this.authService.logoutRedirect({
