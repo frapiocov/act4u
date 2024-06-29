@@ -111,7 +111,7 @@ export class NavbarComponent {
     if (this.msalGuardConfig.interactionType === InteractionType.Popup) {
       this.authService.logoutPopup({
         postLogoutRedirectUri: environment.urlSite,
-        mainWindowRedirectUri: environment.urlSite
+        mainWindowRedirectUri: "https://login.microsoftonline.com/consumers/"
       });
     } else {
       this.authService.logoutRedirect({
