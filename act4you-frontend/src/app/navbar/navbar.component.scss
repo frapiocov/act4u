@@ -2,11 +2,11 @@
 
 @include mat.core();
 
-$primary: mat.define-palette(mat.$indigo-palette);
-$accent: mat.define-palette(mat.$yellow-palette);
-$warn:    mat.define-palette(mat.$red-palette);
+$primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$accent: mat.m2-define-palette(mat.$m2-yellow-palette);
+$warn:    mat.m2-define-palette(mat.$m2-red-palette);
 
-$your-theme: mat.define-light-theme((
+$your-theme: mat.m2-define-light-theme((
  color: (
     primary: $primary,
     accent: $accent,
@@ -18,7 +18,7 @@ $your-theme: mat.define-light-theme((
 
 // Styles for your navbar
 .navbar {
- background-color: mat.get-color-from-palette($primary, 500);
+ background-color: mat.m2-get-color-from-palette($primary, 500);
  height: 64px;
  display: flex;
  align-items: center;
@@ -31,11 +31,11 @@ $your-theme: mat.define-light-theme((
  } 
 
 .navbar a {
- color: mat.get-color-from-palette($primary, default-contrast);
+ color: mat.m2-get-color-from-palette($primary, default-contrast);
  text-decoration: none;
  margin: 0 12px;
 }
 
 .navbar a:hover {
- color: mat.get-color-from-palette($primary, lighter);
+ color: mat.m2-get-color-from-palette($primary, lighter);
 }
