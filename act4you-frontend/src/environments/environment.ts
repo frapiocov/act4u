@@ -1,6 +1,5 @@
 export const environment = {
     tenantId: '',
-    urlSite:'',
 
     //cosmosDB
     cosmosAccountName: '',
@@ -26,7 +25,7 @@ export const environment = {
     videoSasToken: "",
     fileSasToken: "",
 
-    //cognitive services
+    //cognitive Services
     cognitiveServicesUrl: '',
     cognitiveSubKey: '',
 
@@ -34,6 +33,10 @@ export const environment = {
     faceRecognitionUrl: '',
     faceRecognitionKey: '',
 
+    //traslator
+    traslatorPdfUrl: '',
+    traslatorKey: '',
+    traslatorRegion: '',
     //AIdocumentIntelligence
     aiDocUrl:'',
 
@@ -41,4 +44,3 @@ export const environment = {
     Endpoint: '',
     wwsLink: ''
 };
-
