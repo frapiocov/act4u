@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const dir = "src/environments";
+const dir = "act4you-frontend/src/environments";
 const file = "environment.ts";
 const prodFile = "environment.prod.ts"; // For production deployment
 
