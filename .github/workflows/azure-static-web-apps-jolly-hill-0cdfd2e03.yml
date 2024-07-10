@@ -24,7 +24,7 @@ jobs:
           node-version: '20'
       - run: node act4you-frontend/server.js
         env:
-          ENV_KEYS: ${{ secrets.ENV_KEY }}
+          ENV_KEYS: ${{ secrets.ENV_KEYS }}
             
       - name: Build And Deploy
         id: builddeploy

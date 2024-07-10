@@ -36,7 +36,6 @@
     "botframework-directlinejs": "^0.15.5",
     "botframework-webchat": "^4.17.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.4.4",
@@ -53,6 +52,7 @@
     "@angular/cli": "^18.0.6",
     "@angular/compiler-cli": "^18.0.5",
     "@types/jasmine": "~5.1.0",
+    "dotenv": "^16.4.5",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -60,6 +60,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ts-loader": "^9.5.1",
-    "typescript": "~5.4.5"
+    "typescript": "~5.4.5",
+    "yargs": "^17.7.2"
   }
 }

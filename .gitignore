@@ -128,4 +128,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-act4you-frontend/src/environments/environment.development.ts
+act4you-frontend/src/environments/environment.prod.ts

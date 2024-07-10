@@ -4,7 +4,7 @@ const path = require('path');
 
 const dir = "src/environments";
 const file = "environment.ts";
-const prodFile = "environment.development.ts"; // For production deployment
+const prodFile = "environment.prod.ts"; // For production deployment
 
 const content = `${process.env.ENV_KEYS}`;
 
