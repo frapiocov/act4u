@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-      - run: node server.js
+      - run: node act4you-frontend/server.js
         env:
           ENV_KEYS: '${{ secrets.ENV_KEY }}'
             
