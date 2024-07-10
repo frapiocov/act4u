@@ -1,5 +1,6 @@
 export const environment = {
     tenantId: '',
+    urlSite: '',
 
     //cosmosDB
     cosmosAccountName: '',
