@@ -33,6 +33,9 @@ Act4You offre le seguenti funzionalità:
 ## Architettura
 ![arch_prog](assets/arch-prog.png)
 
+## Struttura Nofiche
+![arch_prog](assets/arch-notifiche.png)
+
 ## Servizi Azure
 Act4You utilizza vari servizi di Microsoft Azure per implementare le funzionalità offerte, di seguito quelli utilizzati:
 1. *Azure App Service*: hosting della web app
