@@ -127,25 +127,19 @@ export class CandCardComponent implements OnInit {
     for (let index = 0; index < this.candidati.length; index++) {
       let idUtente : string = this.candidati[index].utente;
       let nomeUtente : string = this.candidati[index].nomeUtente;
-      
+    
       // controllo la posizione dell'utente
       let pos: number = this.checkPosition(idUtente);
 
       let item = {idUtente: idUtente, nomeUtente:nomeUtente, files: [] };
-      console.log(this.candidati[index].type)
-      if(pos == 0){
-        this.filesCandidati.push(item);
-        if (this.candidati[index].type !== 'pdf') {
-          console.log("item1", this.candidati[index].type);
-          this.filesScartati.push(item);
-        }
-      }
+
+      if(pos == 0)
+        this.filesCandidati.push(item); this.filesScartati.push(item);
 
       //this.filesCandidati[pos].files.push(this.candidati[index].file)  
       this.addFileToUser(pos, this.candidati[index].file, this.candidati[index].type);
     }
-    console.log(this.filesCandidati);
-    console.log(this.filesScartati);
+
   }
 
   // utilizza ia document intelligence per analizzare il contenuto del file
