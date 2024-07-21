@@ -126,6 +126,7 @@ export class CandCardComponent implements OnInit {
     return this.blobService.getVideoUrl(name);
   }
 
+
   // costruisco l'insieme dei file per ogni utente
   getUserFiles() {
 
@@ -137,15 +138,18 @@ export class CandCardComponent implements OnInit {
       let pos: number = this.checkPosition(idUtente);
 
       let item = {idUtente: idUtente, nomeUtente:nomeUtente, files: [] };
+      let item2 = {idUtente: idUtente, nomeUtente:nomeUtente, files: [] };
 
       console.log(this.candidati[index].type)
       if(pos == 0)
-        this.filesCandidati.push(item); this.filesScartati.push(item);
+        this.filesCandidati.push(item); this.filesScartati.push(item2);
       
       //this.filesCandidati[pos].files.push(this.candidati[index].file)  
       this.addFileToUser(pos, this.candidati[index].file, this.candidati[index].type);
     }
 
+    console.log(this.filesCandidati);
+    console.log(this.filesScartati);
   }
 
   // utilizza ia document intelligence per analizzare il contenuto del file
