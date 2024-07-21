@@ -8,7 +8,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ImageCognitiveService } from '../services/azure-computer-vision';
-import { FaceRecognitionService } from '../services/azure-facerecognition.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from "../../environments/environment";
 
@@ -34,7 +33,7 @@ export class CandCardComponent implements OnInit {
   showDiscardedFiles = false;
   dataFile: any = {};
 
-  constructor(private blobService: AzureBlobStorageService, private imgCognitiveService :ImageCognitiveService, private faceRecognition: FaceRecognitionService,
+  constructor(private blobService: AzureBlobStorageService, private imgCognitiveService :ImageCognitiveService,
     private cosmosService: CosmosDBService, private http: HttpClient) {}
 
   async ngOnInit() {
@@ -63,38 +62,13 @@ export class CandCardComponent implements OnInit {
     let url: string = "";
 
     switch (type) {
-      case "jpg":
+      case "jpg": case "jpeg": case "png":
         this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
-          this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
             url = this.downloadImage(idFile);
-            //console.log(face);
-            if(this.isInvalidImage(picDetails, face)) {
+            if(this.isInvalidImage(picDetails)) {
               this.saveInFileScartati(pos, url, type);
             } else this.saveInFileCandidati(pos, url, type);
           });
-        });
-        break;
-      case "jpeg":
-        this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
-          this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
-            url = this.downloadImage(idFile);
-            //console.log(face);
-            if(this.isInvalidImage(picDetails, face)) {
-              this.saveInFileScartati(pos, url, type);
-            } else this.saveInFileCandidati(pos, url, type);
-          });
-        });
-        break;
-      case "png":
-        this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
-          this.faceRecognition.getFace(this.downloadImage(idFile)).subscribe((face)=>{
-            url = this.downloadImage(idFile);
-            console.log(face);
-            if(this.isInvalidImage(picDetails, face)) {
-              this.saveInFileScartati(pos, url, type);
-            } else this.saveInFileCandidati(pos, url, type);
-          });
-        });
         break;
       case "mp4":
         url = this.downloadVideo(idFile);
@@ -130,9 +104,9 @@ export class CandCardComponent implements OnInit {
     this.filesScartati[pos] = newFilesScartatiItem;
   }
 
-  public isInvalidImage(resp: any, face: any): boolean{
+  public isInvalidImage(resp: any): boolean{
     return resp.color.isBwImg || resp.color.isBWImg || resp.color.isRacyContent || resp.color.isAdultContent || resp.imageType.clipArtType ||
-    resp.imageType.lineDrawingType || face.length === 0;
+    resp.imageType.lineDrawingType;
   }
 
   public downloadImage(name: string) {
@@ -158,14 +132,20 @@ export class CandCardComponent implements OnInit {
       let pos: number = this.checkPosition(idUtente);
 
       let item = {idUtente: idUtente, nomeUtente:nomeUtente, files: [] };
-
-      if(pos == 0)
-        this.filesCandidati.push(item); this.filesScartati.push(item);
+      console.log(this.candidati[index].type)
+      if(pos == 0){
+        this.filesCandidati.push(item);
+        if (this.candidati[index].type !== 'pdf') {
+          console.log("item1", this.candidati[index].type);
+          this.filesScartati.push(item);
+        }
+      }
 
       //this.filesCandidati[pos].files.push(this.candidati[index].file)  
       this.addFileToUser(pos, this.candidati[index].file, this.candidati[index].type);
     }
-
+    console.log(this.filesCandidati);
+    console.log(this.filesScartati);
   }
 
   // utilizza ia document intelligence per analizzare il contenuto del file

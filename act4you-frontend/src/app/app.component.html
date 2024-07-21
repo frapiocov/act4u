@@ -1,14 +1,9 @@
 <app-navbar></app-navbar>
 <div *ngIf="showToast" (click)="goToast()" class="toast-container success top-right" >
     <div class="toast-content">
-        <div class="title">
-            <span class="titolo">
-                <h5>messaggio</h5>
-            </span>
-        </div>
         <span class="cross closeBtn" (click)="closeToast()"></span>
         <span style="padding-top:10px;">
-            <p style="line-height:1.2em;">messaggio</p>
+            <p style="line-height:1.2em;">C'è un nuovo annuncio!</p>
         </span>
     </div>
 </div>
