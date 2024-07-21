@@ -110,7 +110,8 @@ export class CandCardComponent implements OnInit {
 
   public isInvalidImage(resp: any): boolean{
     console.log('resp', resp)
-    return resp.color.isBwImg || resp.color.isRacyContent || resp.color.isAdultContent || resp.imageType.clipArtType || resp.imageType.lineDrawingType;
+    return resp.color.isBwImg || resp.color.isRacyContent || resp.color.isAdultContent || resp.imageType.clipArtType>2 || resp.imageType.lineDrawingType>2 || 
+    resp.faces.length === 0;
   }
 
   public downloadImage(name: string) {
@@ -137,9 +138,15 @@ export class CandCardComponent implements OnInit {
 
       let item = {idUtente: idUtente, nomeUtente:nomeUtente, files: [] };
 
-      if(pos == 0)
-        this.filesCandidati.push(item); this.filesScartati.push(item);
-
+      console.log(this.candidati[index].type)
+      if(pos == 0){
+        this.filesCandidati.push(item);
+        if (this.candidati[index].type !== 'pdf') {
+          console.log("item1", this.candidati[index].type);
+          this.filesScartati.push(item);
+        }
+      }
+      
       //this.filesCandidati[pos].files.push(this.candidati[index].file)  
       this.addFileToUser(pos, this.candidati[index].file, this.candidati[index].type);
     }

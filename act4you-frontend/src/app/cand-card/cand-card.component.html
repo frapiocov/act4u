@@ -18,7 +18,7 @@
       <h3 *ngIf="item.nomeUtente">Candidato: {{ item.nomeUtente }}</h3>
       <div *ngFor="let file of item.files" style="margin: 0.6rem">
         <div *ngIf="file.type === 'jpg' || file.type === 'png' || file.type === 'jpeg'">
-          <a [href]="file.url"><img [src]="file.url" alt="Photo" width="250"/></a>
+          <a [href]="file.url"><img [src]="file.url" alt="Photo" width="120"/></a>
         </div>
         <div *ngIf="file.type === 'mp4'">
           <a [href]="file.url"><video [src]="file.url" width="200" height="200"></video></a>
