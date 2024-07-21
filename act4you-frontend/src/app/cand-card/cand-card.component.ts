@@ -95,13 +95,14 @@ export class CandCardComponent implements OnInit {
   }
 
   public saveInFileScartati(pos: number, url: string, type: string) {
-    const urlType = {
+    let urlType = {
       url: url,
       type: type
     };
-  
-    const newFilesScartatiItem = { ...this.filesScartati[pos], files: [...this.filesScartati[pos].files, urlType] };
-    this.filesScartati[pos] = newFilesScartatiItem;
+
+    urlType.url = url;
+    urlType.type = type;
+    this.filesScartati[pos].files.push(urlType);
   }
 
   public isInvalidImage(resp: any): boolean{
