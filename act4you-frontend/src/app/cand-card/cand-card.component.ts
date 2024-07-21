@@ -29,7 +29,7 @@ export class CandCardComponent implements OnInit {
 
   candidati: any[] = [];
   filesCandidati: CandidaturaUtente[] = [];
-  filesScartati: CandidaturaUtente[] = [];
+  filesScartati: any[] = [];
   showDiscardedFiles = false;
   dataFile: any = {};
 

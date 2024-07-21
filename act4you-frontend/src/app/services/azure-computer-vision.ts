@@ -14,7 +14,7 @@ export class ImageCognitiveService {
             'Content-Type': 'application/json',
             'Ocp-Apim-Subscription-Key': environment.cognitiveSubKey
         })
-        return this.http.post(environment.cognitiveServicesUrl+'vision/v2.0/analyze?visualFeatures=ImageType,Color,Adult', {url:imageUrl}, {headers: headers});//&details=Celebrities
+        return this.http.post(environment.cognitiveServicesUrl+'vision/v2.0/analyze?visualFeatures=ImageType,Color,Adult,Faces', {url:imageUrl}, {headers: headers});//&details=Celebrities
     }
 
 }
