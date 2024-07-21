@@ -65,6 +65,7 @@ export class CandCardComponent implements OnInit {
       case "jpg": case "jpeg": case "png":
         this.imgCognitiveService.getPicDetails(this.downloadImage(idFile)).subscribe((picDetails)=>{
             url = this.downloadImage(idFile);
+            console.log(picDetails);
             if(this.isInvalidImage(picDetails)) {
               this.saveInFileScartati(pos, url, type);
             } else this.saveInFileCandidati(pos, url, type);
