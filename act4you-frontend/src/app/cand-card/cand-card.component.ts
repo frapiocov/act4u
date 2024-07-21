@@ -89,6 +89,7 @@ export class CandCardComponent implements OnInit {
       url: url,
       type: type
     };
+    console.log('file candidato',urlType )
 
     urlType.url = url;
     urlType.type = type;
