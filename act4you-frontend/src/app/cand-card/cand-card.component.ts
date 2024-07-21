@@ -99,15 +99,16 @@ export class CandCardComponent implements OnInit {
       url: url,
       type: type
     };
-
+    console.log('file scartato',urlType )
+    
     urlType.url = url;
     urlType.type = type;
     this.filesScartati[pos].files.push(urlType);
   }
 
   public isInvalidImage(resp: any): boolean{
-    return resp.color.isBwImg || resp.color.isBWImg || resp.color.isRacyContent || resp.color.isAdultContent || resp.imageType.clipArtType ||
-    resp.imageType.lineDrawingType;
+    console.log('resp', resp)
+    return resp.color.isBwImg || resp.color.isRacyContent || resp.color.isAdultContent || resp.imageType.clipArtType || resp.imageType.lineDrawingType;
   }
 
   public downloadImage(name: string) {
